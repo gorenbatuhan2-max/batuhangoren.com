@@ -13,9 +13,12 @@ export const siteConfig = {
   legalName: 'Batuhan Gören Mimarlık Ltd. Şti.',
   founder: 'Batuhan Gören',
   description:
-    "Onikişubat / Kahramanmaraş merkezli, Türkiye genelinde ve yurt dışında hizmet veren mimarlık ve yapı stüdyosu. Villa, çok katlı konut ve uygulama projelerinde deprem güvenli, modern ve yerel dokuya uyumlu tasarım.",
+    'Kahramanmaraş merkezli mimarlık stüdyosu. Villa, çok katlı konut ve kamu yapılarında deprem güvenli, modern tasarım ve ruhsat danışmanlığı.',
   // TODO: Domain'iniz farklıysa güncelleyin.
   url: 'https://batuhangoren.com',
+  // İçerikte kayda değer bir güncelleme yapıldığında bu tarihi güncelleyin
+  // (JSON-LD dateModified ve GEO "freshness" sinyali için kullanılıyor).
+  lastUpdated: '2026-08-31',
   locale: 'tr_TR',
   email: 'info@batuhangoren.com',
   phone: {

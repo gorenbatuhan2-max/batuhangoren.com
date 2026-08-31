@@ -9,6 +9,7 @@ import { Reveal } from '@/components/reveal'
 import { ProjectCard } from '@/components/project-card'
 import { ConsultationBanner } from '@/components/home/consultation-banner'
 import { projects } from '@/lib/data'
+import { siteConfig } from '@/lib/site-config'
 
 export function generateStaticParams() {
   return projects.map((project) => ({ id: project.id }))
@@ -45,8 +46,25 @@ export default async function ProjectDetailPage({
 
   const related = projects.filter((p) => p.id !== project.id && p.category === project.category).slice(0, 3)
 
+  const projectSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.title,
+    description: project.description,
+    url: `${siteConfig.url}/projeler/${project.id}`,
+    image: `${siteConfig.url}${project.image}`,
+    locationCreated: { '@type': 'Place', name: project.location },
+    creator: { '@id': `${siteConfig.url}/#founder` },
+    about: { '@id': `${siteConfig.url}/#business` },
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+      />
       <section className="relative overflow-hidden bg-navy-deep pt-32 pb-12">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Link

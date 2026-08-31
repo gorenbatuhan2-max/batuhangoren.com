@@ -35,7 +35,7 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Kahramanmaraş`,
+    default: `${siteConfig.name} | Kahramanmaraş Mimarlık Ofisi`,
     template: `%s | ${siteConfig.shortName}`,
   },
   description: siteConfig.description,
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} — Kahramanmaraş`,
+    title: `${siteConfig.name} | Kahramanmaraş Mimarlık Ofisi`,
     description: siteConfig.description,
     images: [
       {
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${siteConfig.name} — Kahramanmaraş`,
+    title: `${siteConfig.name} | Kahramanmaraş Mimarlık Ofisi`,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
   },

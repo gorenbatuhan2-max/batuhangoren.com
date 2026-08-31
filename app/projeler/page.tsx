@@ -3,6 +3,8 @@ import { BlueprintGrid } from '@/components/blueprint-grid'
 import { Reveal } from '@/components/reveal'
 import { ProjectsFilterGrid } from '@/components/projects/projects-filter-grid'
 import { ConsultationBanner } from '@/components/home/consultation-banner'
+import { projects } from '@/lib/data'
+import { siteConfig } from '@/lib/site-config'
 
 export const metadata: Metadata = {
   title: 'Projeler',
@@ -11,9 +13,26 @@ export const metadata: Metadata = {
   alternates: { canonical: '/projeler' },
 }
 
+const projectsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Batuhan Gören Mimarlık Proje Portföyü',
+  itemListElement: projects.map((project, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    url: `${siteConfig.url}/projeler/${project.id}`,
+    name: project.title,
+  })),
+}
+
 export default function ProjectsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsSchema) }}
+      />
       <section className="relative overflow-hidden bg-navy-deep pt-32 pb-16">
         <BlueprintGrid className="text-navy-deep-foreground" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
