@@ -20,6 +20,15 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value: '</sitemap.xml>; rel="sitemap", </llms.txt>; rel="describedby"',
+          },
+        ],
+      },
     ]
   },
 }
