@@ -1,0 +1,15 @@
+/* TEAM */
+Mimar: Batuhan Gören
+Konum: Onikişubat, Kahramanmaraş, Türkiye
+E-posta: info@batuhangoren.com
+Site: https://batuhangoren.com
+
+/* THANKS */
+v0.dev — ilk arayüz taslağı için
+
+/* SITE */
+Son güncelleme: 2026-08-30
+Diller: Türkçe (tr)
+Bileşenler: Next.js, React, TypeScript, Tailwind CSS, Framer Motion
+Barındırma: Vercel
+Standartlar: HTML5, WCAG 2.1 AA hedefi

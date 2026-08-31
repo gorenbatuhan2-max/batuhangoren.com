@@ -1,0 +1,4 @@
+Contact: mailto:info@batuhangoren.com
+Expires: 2027-08-30T10:11:02.000Z
+Preferred-Languages: tr, en
+Canonical: https://batuhangoren.com/.well-known/security.txt
