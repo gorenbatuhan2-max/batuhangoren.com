@@ -1,5 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import { Plus_Jakarta_Sans, Syne, Fraunces } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
 import { CopyGuard } from '@/components/copy-guard'
@@ -130,6 +131,22 @@ export default function RootLayout({
         <SiteFooter />
         <Toaster />
         {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <Script
+              src="https://www.googletagmanager.com/gtag/js?id=G-Z2GKSWB02W"
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-Z2GKSWB02W');
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   )
