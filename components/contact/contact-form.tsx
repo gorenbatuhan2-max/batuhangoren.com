@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { toast } from 'sonner'
 import { Loader2, Send, Upload, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -23,10 +24,28 @@ export function ContactForm() {
   const [fileName, setFileName] = useState<string | null>(null)
   const [province, setProvince] = useState(DEFAULT_PROVINCE)
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const form = e.currentTarget
     setStatus('submitting')
-    setTimeout(() => setStatus('success'), 1200)
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        body: new FormData(form),
+      })
+
+      const data = await res.json().catch(() => ({}))
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Talebiniz gönderilemedi. Lütfen tekrar deneyin.')
+      }
+
+      setStatus('success')
+    } catch (error) {
+      setStatus('idle')
+      toast.error(error instanceof Error ? error.message : 'Talebiniz gönderilemedi. Lütfen tekrar deneyin.')
+    }
   }
 
   if (status === 'success') {
