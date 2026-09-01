@@ -24,6 +24,8 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
             src={project.image || '/placeholder.svg'}
             alt={`${project.title} - ${project.categoryLabel}`}
             fill
+            priority={index === 0}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-navy-deep/10 to-transparent" />

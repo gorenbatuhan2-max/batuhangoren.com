@@ -8,7 +8,7 @@ import { getMarkdownForPath } from '@/lib/markdown'
  * bu sayfalar etkilenmez.
  * https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const accept = request.headers.get('accept') || ''
   const wantsMarkdownOnly = accept.includes('text/markdown') && !accept.includes('text/html')
 

@@ -26,6 +26,7 @@ export function HeroSection() {
             alt="Kahramanmaraş'ta modern mimari tasarımlı lüks villa"
             fill
             priority
+            sizes="100vw"
             className="object-cover opacity-45"
           />
         </motion.div>

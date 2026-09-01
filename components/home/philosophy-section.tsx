@@ -41,6 +41,7 @@ export function PhilosophySection() {
                 src="/images/site-analysis.png"
                 alt="Kahramanmaraş'ta arazi ve zemin analizi çalışması"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/60 via-transparent to-transparent" />

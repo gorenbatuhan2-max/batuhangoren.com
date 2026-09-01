@@ -38,7 +38,7 @@ export function ServicesFaq() {
         />
 
         <Reveal delay={0.1} className="mt-12">
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion className="w-full">
             {faqs.map((faq, i) => (
               <AccordionItem key={faq.question} value={`item-${i}`}>
                 <AccordionTrigger className="text-left font-display text-base font-semibold text-foreground">

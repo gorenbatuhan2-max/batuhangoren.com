@@ -67,6 +67,18 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="rounded-md border border-border bg-background p-6 sm:p-8">
+      <label htmlFor="company" className="sr-only">
+        Şirket (bu alanı boş bırakın)
+      </label>
+      <input
+        id="company"
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] size-px opacity-0"
+      />
       <FieldGroup>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <Field>
@@ -188,7 +200,7 @@ export function ContactForm() {
           >
             <Upload className="size-5 text-muted-foreground" />
             <span className="text-sm text-muted-foreground">
-              {fileName ? fileName : 'Dosya seçmek için tıklayın (PDF, JPG, PNG)'}
+              {fileName ? fileName : 'Dosya seçmek için tıklayın (PDF, JPG, PNG — maks. 4MB)'}
             </span>
             <input
               id="file-upload"

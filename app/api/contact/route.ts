@@ -4,8 +4,36 @@ import { landStatusOptions } from '@/lib/data'
 
 const RECIPIENTS = ['info@batuhangoren.com', 'gorenbatuhan@gmail.com']
 const FROM = 'Batuhan Gören Mimarlık <no-reply@batuhangoren.com>'
-const MAX_ATTACHMENT_SIZE = 8 * 1024 * 1024
+// Vercel Serverless Functions cap the request body around 4.5MB; stay safely under that.
+const MAX_ATTACHMENT_SIZE = 4 * 1024 * 1024
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const PHONE_PATTERN = /^[\d\s()+-]{7,20}$/
+const MAX_MESSAGE_LENGTH = 5000
+const ALLOWED_ATTACHMENT_TYPES = new Set(['application/pdf', 'image/jpeg', 'image/png'])
+
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000
+const RATE_LIMIT_MAX_REQUESTS = 5
+const requestLog = new Map<string, number[]>()
+
+function isRateLimited(ip: string) {
+  const now = Date.now()
+  const timestamps = (requestLog.get(ip) ?? []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
+  timestamps.push(now)
+  requestLog.set(ip, timestamps)
+
+  if (requestLog.size > 5000) {
+    for (const [key, value] of requestLog) {
+      if (value.every((t) => now - t >= RATE_LIMIT_WINDOW_MS)) requestLog.delete(key)
+    }
+  }
+
+  return timestamps.length > RATE_LIMIT_MAX_REQUESTS
+}
+
+function sanitizeFilename(name: string) {
+  const base = name.split(/[/\\]/).pop() ?? 'ek-dosya'
+  return base.replace(/[^\w.\- ]/g, '_').slice(0, 150) || 'ek-dosya'
+}
 
 function escapeHtml(value: string) {
   return value
@@ -22,11 +50,26 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Sunucu yapılandırma hatası.' }, { status: 500 })
   }
 
+  const origin = request.headers.get('origin')
+  if (origin && origin !== request.nextUrl.origin) {
+    return NextResponse.json({ error: 'Geçersiz istek kaynağı.' }, { status: 403 })
+  }
+
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: 'Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin.' }, { status: 429 })
+  }
+
   let formData: FormData
   try {
     formData = await request.formData()
   } catch {
     return NextResponse.json({ error: 'Geçersiz form verisi.' }, { status: 400 })
+  }
+
+  // Honeypot: gizli alan yalnızca botlar tarafından doldurulur. Doluysa sessizce başarı dön.
+  if (formData.get('company')?.toString().trim()) {
+    return NextResponse.json({ success: true })
   }
 
   const name = formData.get('name')?.toString().trim() ?? ''
@@ -37,7 +80,7 @@ export async function POST(request: NextRequest) {
   const province = formData.get('province')?.toString().trim() ?? ''
   const district = formData.get('district')?.toString().trim() ?? ''
   const districtDetail = formData.get('district-detail')?.toString().trim() ?? ''
-  const message = formData.get('message')?.toString().trim() ?? ''
+  const message = formData.get('message')?.toString().trim().slice(0, MAX_MESSAGE_LENGTH) ?? ''
   const file = formData.get('file-upload')
 
   if (!name || !phone || !email || !projectType || !landStatusValue) {
@@ -48,6 +91,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Geçerli bir e-posta adresi girin.' }, { status: 400 })
   }
 
+  if (!PHONE_PATTERN.test(phone)) {
+    return NextResponse.json({ error: 'Geçerli bir telefon numarası girin.' }, { status: 400 })
+  }
+
   const landStatusLabel = landStatusOptions.find((o) => o.value === landStatusValue)?.label ?? landStatusValue
   const districtPart = district || districtDetail
   const location = [province, districtPart].filter(Boolean).join(' / ') || '-'
@@ -55,9 +102,12 @@ export async function POST(request: NextRequest) {
   const attachments: { filename: string; content: Buffer }[] = []
   if (file instanceof File && file.size > 0) {
     if (file.size > MAX_ATTACHMENT_SIZE) {
-      return NextResponse.json({ error: "Dosya boyutu 8MB'ı aşamaz." }, { status: 400 })
+      return NextResponse.json({ error: "Dosya boyutu 4MB'ı aşamaz." }, { status: 400 })
     }
-    attachments.push({ filename: file.name, content: Buffer.from(await file.arrayBuffer()) })
+    if (!ALLOWED_ATTACHMENT_TYPES.has(file.type)) {
+      return NextResponse.json({ error: 'Yalnızca PDF, JPG veya PNG dosyası yükleyebilirsiniz.' }, { status: 400 })
+    }
+    attachments.push({ filename: sanitizeFilename(file.name), content: Buffer.from(await file.arrayBuffer()) })
   }
 
   const rows: [string, string][] = [
