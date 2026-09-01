@@ -22,8 +22,8 @@ export function HeroSection() {
       <div className="absolute inset-0">
         <motion.div className="absolute inset-0 -top-[10%] h-[120%]" style={{ y: imageY }}>
           <Image
-            src="/images/hero-villa.png"
-            alt="Kahramanmaraş'ta modern mimari tasarımlı lüks villa"
+            src="/images/project-fildisi-sahili-villa-6.jpg"
+            alt="Batuhan Gören Mimarlık tarafından tasarlanan modern villa projesi"
             fill
             priority
             sizes="100vw"
@@ -100,11 +100,11 @@ export function HeroSection() {
               stagger={0.1}
               inView={false}
               lines={[
-                <>Kahramanmaraş&apos;ın Yerel Karakteriyle</>,
+                <>Kahramanmaraş&apos;ın Dokusuna Sadık,</>,
                 <>
-                  Buluşan <span className="text-primary">Modern, Fonksiyonel</span>
+                  <span className="text-primary">Modern ve Depreme Dayanıklı</span>
                 </>,
-                <>ve Güvenli Yaşam Alanları</>,
+                <>Yaşam Alanları Tasarlıyoruz</>,
               ]}
             />
           </h1>
