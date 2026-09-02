@@ -247,10 +247,9 @@ export const projects: Project[] = [
 ]
 
 export const stats = [
-  { value: 2022, suffix: '', label: "Kahramanmaraş'ta Kuruluş Yılı" },
   { value: 45, suffix: '+', label: 'Gerçekleştirilen & Teklif Projesi' },
   { value: 100, suffix: '%', label: 'Deprem ve Yapı Güvenliği Standardına Uyum' },
-  { value: 1, suffix: '', label: 'Kahramanmaraş Mimarlar Odası 2023-2025 Dönemi Yönetim Kurulu Üyesi', isText: true },
+  { value: 25, suffix: '+', label: 'Toplam Yerinde Dönüşüm Ruhsat Sayısı' },
 ]
 
 export const services = [

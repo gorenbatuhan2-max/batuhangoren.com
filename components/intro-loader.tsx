@@ -91,7 +91,7 @@ export function IntroLoader() {
           transition={{ duration: 0.8, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
           className="mt-6 text-[10px] font-semibold uppercase tracking-[0.5em] text-navy-deep-foreground/70 sm:text-xs"
         >
-          Form · Estetik · Ruh
+          Form · Aesthetic · Soul
         </motion.p>
       </motion.div>
     </div>

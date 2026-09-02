@@ -45,7 +45,7 @@ export const siteConfig = {
     linktree: 'https://link.batuhangoren.com/',
   },
   mapsUrl: 'https://maps.app.goo.gl/mpprwAc9u2KPPWHX9',
-  ogImage: '/images/hero-villa.png',
+  ogImage: '/images/project-fildisi-sahili-villa-6.jpg',
   themeColor: '#0B132B',
 } as const
 

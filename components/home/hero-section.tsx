@@ -47,7 +47,7 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-[11px] font-semibold uppercase tracking-[0.5em] text-navy-deep-foreground/40"
         >
-          Form · Estetik · Ruh
+          Form · Aesthetic · Soul
         </motion.span>
       </div>
 

@@ -14,14 +14,12 @@ function frontMatter(title: string, description: string, path: string): string {
 }
 
 function homeMarkdown(): string {
-  const statLines = stats
-    .map((s) => `- ${s.isText ? s.value : `${s.value}${s.suffix}`}: ${s.label}`)
-    .join('\n')
+  const statLines = stats.map((s) => `- ${s.value}${s.suffix}: ${s.label}`).join('\n')
   const serviceLines = services.map((s) => `- **${s.title}** — ${s.short}`).join('\n')
 
   return (
     frontMatter(`${siteConfig.name} | Kahramanmaraş Mimarlık Ofisi`, siteConfig.description, '/') +
-    `\n## Kahramanmaraş'ın Yerel Karakteriyle Buluşan Modern, Fonksiyonel ve Güvenli Yaşam Alanları\n\n` +
+    `\n## Kahramanmaraş'ın Dokusuna Sadık, Modern ve Depreme Dayanıklı Yaşam Alanları Tasarlıyoruz\n\n` +
     `Onikişubat merkezli stüdyomuzda mimari tasarım, planlama ve konut yapımını bir arada yürütüyor; ` +
     `her projeyi arazinin dokusuna ve deprem güvenliği standartlarına uygun şekilde hayata geçiriyoruz.\n\n` +
     `## Öne Çıkan Rakamlar\n\n${statLines}\n\n` +

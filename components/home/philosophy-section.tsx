@@ -52,9 +52,9 @@ export function PhilosophySection() {
             <Reveal className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.4em] text-muted-foreground">
               <span>Form</span>
               <span className="text-primary">·</span>
-              <span>Estetik</span>
+              <span>Aesthetic</span>
               <span className="text-primary">·</span>
-              <span>Ruh</span>
+              <span>Soul</span>
             </Reveal>
             <SectionHeading
               eyebrow="Mimari Felsefemiz"
