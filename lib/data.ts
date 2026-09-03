@@ -253,13 +253,13 @@ export const projects: Project[] = [
     location: 'Göksun / Kahramanmaraş',
     year: '',
     area: '',
-    image: '/images/project-goksun-ges-3.png',
+    image: '/images/project-goksun-ges-5.png',
     images: [
+      '/images/project-goksun-ges-5.png',
       '/images/project-goksun-ges-3.png',
       '/images/project-goksun-ges-4.png',
       '/images/project-goksun-ges-1.png',
       '/images/project-goksun-ges-2.png',
-      '/images/project-goksun-ges-5.png',
     ],
     summary: 'Göksun ilçesinde arazi tipi kurulum için hazırlanan güneş enerji santrali saha yerleşim projesi.',
     description:
