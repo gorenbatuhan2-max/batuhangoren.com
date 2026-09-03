@@ -1,4 +1,4 @@
-export type ProjectCategory = 'villa' | 'konut' | 'kamu' | 'ticari'
+export type ProjectCategory = 'villa' | 'konut' | 'kamu' | 'ticari' | 'enerji'
 
 export interface Project {
   id: string
@@ -21,6 +21,7 @@ export const categoryLabels: Record<ProjectCategory, string> = {
   konut: 'Toplu Konut & Tip Proje',
   kamu: 'Kamu & Kurumsal Yapılar',
   ticari: 'Ticari & Turizm Yapıları',
+  enerji: 'Enerji Santralleri',
 }
 
 export const projects: Project[] = [
@@ -243,6 +244,48 @@ export const projects: Project[] = [
       'Fildişi Sahili\'nde hayata geçirilen bu proje, stüdyomuzun Kahramanmaraş dışına ve yurt dışına uzanan mimari projelendirme kapasitesini gösteriyor. Tuğla cephe dokusu, ahşap latis detayları ve geniş balkonlarıyla villa, sıcak iklime uygun gölgeli açık alanlar sunuyor.',
     highlights: ['İki katlı, balkonlu müstakil villa kütlesi', 'Tuğla ve ahşap latis cephe malzeme dili', 'Sıcak iklime uygun gölgelendirme çözümleri', 'Yurt dışı ölçekli mimari projelendirme referansı'],
     scope: ['Konsept Tasarım', 'Mimari Proje', '3D Görselleştirme'],
+  },
+  {
+    id: 'goksun-ges',
+    title: 'Göksun Güneş Enerji Santrali',
+    category: 'enerji',
+    categoryLabel: categoryLabels.enerji,
+    location: 'Göksun / Kahramanmaraş',
+    year: '',
+    area: '',
+    image: '/images/project-goksun-ges-3.png',
+    images: [
+      '/images/project-goksun-ges-3.png',
+      '/images/project-goksun-ges-4.png',
+      '/images/project-goksun-ges-1.png',
+      '/images/project-goksun-ges-2.png',
+      '/images/project-goksun-ges-5.png',
+    ],
+    summary: 'Göksun ilçesinde arazi tipi kurulum için hazırlanan güneş enerji santrali saha yerleşim projesi.',
+    description:
+      'Göksun\'da hayata geçirilen bu proje, geniş ölçekli bir güneş enerji santralinin (GES) saha yerleşimini ve mimari projelendirmesini kapsıyor. Topografyaya uygun panel dizilimi ve altyapı planlamasıyla, büyük kapsamlı enerji yatırımlarınız için uçtan uca teknik hizmet sunuyoruz.',
+    highlights: ['Arazi tipi güneş paneli saha yerleşim planı', 'Topografyaya duyarlı panel dizilim optimizasyonu', 'Enerji tesisi için izin ve ruhsat süreç desteği', 'Büyük kapsamlı yatırımlara uygun mimari projelendirme'],
+    scope: ['Saha Yerleşim Planı', 'Mimari Proje', '3D Görselleştirme', 'Ruhsat Süreci'],
+  },
+  {
+    id: 'narli-ges',
+    title: 'Narlı Güneş Enerji Santrali',
+    category: 'enerji',
+    categoryLabel: categoryLabels.enerji,
+    location: 'Narlı / Kahramanmaraş',
+    year: '',
+    area: '',
+    image: '/images/project-narli-ges-3.png',
+    images: [
+      '/images/project-narli-ges-3.png',
+      '/images/project-narli-ges-1.png',
+      '/images/project-narli-ges-2.png',
+    ],
+    summary: 'Narlı bölgesinde arazi tipi kurulum için hazırlanan güneş enerji santrali saha yerleşim projesi.',
+    description:
+      'Narlı\'da geliştirilen bu güneş enerji santrali (GES) projesi, saha yerleşim planlaması ve mimari projelendirmeyi bir arada yürütüyor. Verimli panel dizilimi ve teknik altyapı çözümleriyle, büyük kapsamlı enerji santrali projeleriniz için hizmetinizdeyiz.',
+    highlights: ['Arazi tipi güneş paneli saha yerleşim planı', 'Verimli panel dizilimi ve altyapı kurgusu', 'Enerji tesisi için izin ve ruhsat süreç desteği', 'Büyük kapsamlı yatırımlara uygun mimari projelendirme'],
+    scope: ['Saha Yerleşim Planı', 'Mimari Proje', '3D Görselleştirme', 'Ruhsat Süreci'],
   },
 ]
 

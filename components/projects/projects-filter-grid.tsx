@@ -12,6 +12,7 @@ const tabs: { key: 'all' | ProjectCategory; label: string }[] = [
   { key: 'konut', label: categoryLabels.konut },
   { key: 'kamu', label: categoryLabels.kamu },
   { key: 'ticari', label: categoryLabels.ticari },
+  { key: 'enerji', label: categoryLabels.enerji },
 ]
 
 export function ProjectsFilterGrid() {
