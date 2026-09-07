@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { AtSign, Users, Palette, MapPin, Phone, Mail } from 'lucide-react'
+import { AtSign, Users, MapPin, Phone, Mail } from 'lucide-react'
 import { services } from '@/lib/data'
 import { siteConfig } from '@/lib/site-config'
 
@@ -43,15 +43,6 @@ export function SiteFooter() {
               >
                 <Users className="size-4" />
               </a>
-              <a
-                href={siteConfig.social.behance}
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="Behance"
-                className="flex size-9 items-center justify-center rounded-sm border border-white/15 text-white/70 transition-colors hover:border-primary hover:text-primary"
-              >
-                <Palette className="size-4" />
-              </a>
             </div>
           </div>
 
@@ -90,7 +81,9 @@ export function SiteFooter() {
             <ul className="flex flex-col gap-3 text-sm text-white/70">
               <li className="flex items-start gap-2">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
-                {siteConfig.address.district}, {siteConfig.address.city}
+                <a href={siteConfig.mapsUrl} target="_blank" rel="noreferrer noopener" className="transition-colors hover:text-primary">
+                  {siteConfig.address.streetAddress}, {siteConfig.address.district} / {siteConfig.address.city}
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="size-4 shrink-0 text-primary" />

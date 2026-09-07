@@ -2,7 +2,7 @@
 Mimar: Batuhan Gören
 Konum: Onikişubat, Kahramanmaraş, Türkiye
 E-posta: info@batuhangoren.com
-Site: https://batuhangoren.com
+Site: https://www.batuhangoren.com
 
 /* THANKS */
 v0.dev — ilk arayüz taslağı için

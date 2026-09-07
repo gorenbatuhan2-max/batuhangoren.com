@@ -17,7 +17,11 @@ export function ContactInfo() {
             <div>
               <p className="text-sm font-medium text-navy-deep-foreground">Stüdyo Adresi</p>
               <p className="mt-0.5 text-sm text-navy-deep-foreground/70">
+                {siteConfig.address.streetAddress}<br />
                 {siteConfig.address.district} / {siteConfig.address.city}
+              </p>
+              <p className="mt-2 text-sm text-navy-deep-foreground/70">
+                {siteConfig.address.directions}
               </p>
             </div>
           </div>
@@ -115,8 +119,8 @@ export function ContactInfo() {
       <div className="flex flex-col gap-3">
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md border border-border">
           <iframe
-            title={`${siteConfig.address.district}, ${siteConfig.address.city} harita konumu`}
-            src={`https://www.google.com/maps?q=${siteConfig.address.district},${siteConfig.address.city}&output=embed`}
+            title={`${siteConfig.name} ofis konumu`}
+            src={siteConfig.mapsEmbedUrl}
             className="size-full grayscale-[40%] contrast-125 invert-[8%]"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

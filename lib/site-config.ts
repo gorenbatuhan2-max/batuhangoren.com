@@ -1,9 +1,7 @@
 /**
  * Merkezi site bilgileri.
  *
- * Telefon, WhatsApp ve sosyal medya alanlarındaki değerler şu an PLACEHOLDER'dır.
- * Gerçek bilgilerinizi girmek için sadece bu dosyayı güncellemeniz yeterli —
- * header, footer, iletişim sayfası ve WhatsApp butonu buradan besleniyor.
+ * İletişim, harita ve arama motoru bilgileri bu dosyadan beslenir.
  */
 
 export const siteConfig = {
@@ -14,11 +12,11 @@ export const siteConfig = {
   founder: 'Batuhan Gören',
   description:
     'Kahramanmaraş merkezli mimarlık stüdyosu. Villa, çok katlı konut ve kamu yapılarında deprem güvenli, modern tasarım ve ruhsat danışmanlığı.',
-  // TODO: Domain'iniz farklıysa güncelleyin.
-  url: 'https://batuhangoren.com',
+  // Vercel'in www'siz alan adından yönlendirdiği birincil yayın adresi.
+  url: 'https://www.batuhangoren.com',
   // İçerikte kayda değer bir güncelleme yapıldığında bu tarihi güncelleyin
-  // (JSON-LD dateModified ve GEO "freshness" sinyali için kullanılıyor).
-  lastUpdated: '2026-08-31',
+  // (JSON-LD dateModified ve sitemap lastModified için kullanılıyor).
+  lastUpdated: '2026-09-07',
   locale: 'tr_TR',
   email: 'info@batuhangoren.com',
   phone: {
@@ -31,6 +29,8 @@ export const siteConfig = {
     href: 'https://wa.me/905387005191?text=Merhaba%2C%20projem%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum.',
   },
   address: {
+    streetAddress: 'Cumhuriyet Mahallesi, Gazi Osman Paşa Bulvarı, Nur Apartmanı No: 7/A',
+    directions: 'Çevre, Şehircilik Müdürlüğü karşısı, yokuş devamı.',
     district: 'Onikişubat',
     city: 'Kahramanmaraş',
     region: 'Kahramanmaraş',
@@ -38,13 +38,16 @@ export const siteConfig = {
     countryName: 'Türkiye',
   },
   social: {
-    // TODO: Gerçek profil linklerinizle değiştirin. Hesabınız yoksa alanı boş bırakabilirsiniz.
     instagram: 'https://www.instagram.com/bthngoren/',
     linkedin: 'https://www.linkedin.com/in/batuhan-goren-2879b03a9/',
-    behance: 'https://behance.net',
     linktree: 'https://link.batuhangoren.com/',
   },
-  mapsUrl: 'https://maps.app.goo.gl/mpprwAc9u2KPPWHX9',
+  mapsUrl: 'https://maps.app.goo.gl/vRNBuEvcyzDSQGpp7',
+  mapsEmbedUrl: 'https://www.google.com/maps?cid=9015557454168528375&output=embed',
+  geo: {
+    latitude: 37.5945891,
+    longitude: 36.8603702,
+  },
   ogImage: '/images/project-fildisi-sahili-villa-6.jpg',
   themeColor: '#0B132B',
 } as const

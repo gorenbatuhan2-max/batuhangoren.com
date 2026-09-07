@@ -106,7 +106,8 @@ function contactMarkdown(): string {
     `- Telefon: ${siteConfig.phone.display}\n` +
     `- WhatsApp: https://wa.me/${siteConfig.whatsapp.number}\n` +
     `- E-posta: ${siteConfig.email}\n` +
-    `- Adres: ${siteConfig.address.district} / ${siteConfig.address.city}, ${siteConfig.address.countryName}\n` +
+    `- Adres: ${siteConfig.address.streetAddress}, ${siteConfig.address.district} / ${siteConfig.address.city}, ${siteConfig.address.countryName}\n` +
+    `- Yol tarifi: ${siteConfig.address.directions}\n` +
     `- Harita: ${siteConfig.mapsUrl}\n`
   )
 }

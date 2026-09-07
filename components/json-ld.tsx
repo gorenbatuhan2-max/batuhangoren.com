@@ -49,8 +49,15 @@ export function JsonLd() {
     image: `${siteConfig.url}${siteConfig.ogImage}`,
     logo: `${siteConfig.url}/icon.svg`,
     priceRange: '$$',
+    hasMap: siteConfig.mapsUrl,
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: siteConfig.geo.latitude,
+      longitude: siteConfig.geo.longitude,
+    },
     address: {
       '@type': 'PostalAddress',
+      streetAddress: siteConfig.address.streetAddress,
       addressLocality: siteConfig.address.district,
       addressRegion: siteConfig.address.region,
       addressCountry: siteConfig.address.country,
@@ -66,7 +73,6 @@ export function JsonLd() {
     sameAs: [
       siteConfig.social.instagram,
       siteConfig.social.linkedin,
-      siteConfig.social.behance,
       siteConfig.social.linktree,
     ].filter(Boolean),
   }

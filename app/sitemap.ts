@@ -12,18 +12,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/iletisim', priority: 0.7, changeFrequency: 'yearly' },
   ]
 
-  const now = new Date()
+  const lastModified = siteConfig.lastUpdated
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
     url: `${siteConfig.url}${route.path}`,
-    lastModified: now,
+    lastModified,
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }))
 
   const projectEntries: MetadataRoute.Sitemap = projects.map((project) => ({
     url: `${siteConfig.url}/projeler/${project.id}`,
-    lastModified: now,
+    lastModified,
     changeFrequency: 'monthly',
     priority: 0.6,
   }))
