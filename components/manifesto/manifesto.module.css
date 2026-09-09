@@ -1,0 +1,202 @@
+/*
+ * Manifesto sayfası — ana sayfayla aynı dil.
+ * Renk ve tipografi değişkenleri `anasayfa.module.css` içindeki `.root`
+ * sarmalayıcısından miras alınır; burada yalnızca sayfaya özgü düzen var.
+ */
+
+.mono {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ── hero ── */
+.hero {
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8rem var(--pad) clamp(3rem, 9vh, 6rem);
+}
+.eyebrow {
+  color: var(--dim);
+}
+.title {
+  font-style: italic;
+  font-weight: 200;
+  font-size: clamp(3rem, 11vw, 9rem);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  margin: 1.5rem 0 0;
+  max-width: 14ch;
+}
+.subtitle {
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.15rem, 2.4vw, 1.75rem);
+  line-height: 1.3;
+  color: rgba(233, 229, 220, 0.72);
+  margin: 1.75rem 0 0;
+}
+.intro {
+  max-width: 52ch;
+  margin: 1.5rem 0 0;
+  color: rgba(233, 229, 220, 0.66);
+}
+.heroFoot {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: clamp(2.5rem, 8vh, 5rem);
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--hair);
+  color: var(--dim);
+}
+
+/* ── gövde: sabit içindekiler + metin ── */
+.body {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+  padding: 0 var(--pad);
+}
+@media (max-width: 1000px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+}
+
+.toc {
+  position: sticky;
+  top: 7rem;
+  max-height: calc(100svh - 10rem);
+  overflow-y: auto;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--hair);
+}
+@media (max-width: 1000px) {
+  .toc {
+    display: none;
+  }
+}
+.tocHead {
+  display: block;
+  color: var(--dim);
+  margin-bottom: 1rem;
+}
+.tocList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tocList li {
+  margin: 0;
+}
+.tocLink {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0.5rem;
+  align-items: baseline;
+  width: 100%;
+  padding: 0.4rem 0;
+  background: 0;
+  border: 0;
+  color: var(--dim);
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.35s ease, padding-left 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tocLink:hover {
+  color: rgba(233, 229, 220, 0.85);
+}
+.tocLink em {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  font-style: normal;
+}
+.tocActive {
+  color: var(--bone);
+  padding-left: 0.5rem;
+}
+
+/* ── bölümler ── */
+.section {
+  scroll-margin-top: 6.5rem;
+  padding: clamp(3.5rem, 9vh, 6rem) 0;
+  border-bottom: 1px solid var(--hair);
+  max-width: 42rem;
+}
+.section:first-child {
+  padding-top: 0;
+}
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: clamp(1.75rem, 4vh, 2.5rem);
+}
+.roman {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  color: var(--dim);
+  flex: none;
+  min-width: 3rem;
+}
+.sectionTitle {
+  font-style: italic;
+  font-weight: 200;
+  font-size: clamp(1.75rem, 4.4vw, 3rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+.prose p {
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: rgba(233, 229, 220, 0.78);
+  margin: 0 0 1.3rem;
+  text-wrap: pretty;
+}
+.prose p:last-child {
+  margin-bottom: 0;
+}
+/* Metindeki *vurgular* italik ve tam parlaklıkta. */
+.prose em {
+  font-style: italic;
+  color: var(--bone);
+}
+/* İlk paragraf, bölüme giriş tonu. */
+.section .prose p:first-child {
+  font-size: clamp(1.15rem, 1.9vw, 1.35rem);
+  line-height: 1.6;
+  color: var(--bone);
+}
+
+/* ── künye ── */
+.colophon {
+  max-width: 42rem;
+  padding: clamp(3.5rem, 9vh, 6rem) 0 0;
+}
+.colophon p {
+  color: rgba(233, 229, 220, 0.66);
+  margin: 0 0 1.1rem;
+  max-width: 46ch;
+}
+.colophonMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.5rem;
+  margin-top: 1.75rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--hair);
+  color: var(--dim);
+}

@@ -52,13 +52,13 @@ export function IntroLoader() {
   return (
     <div className="fixed inset-0 z-[200]" aria-hidden="true">
       <motion.div
-        className="absolute left-0 top-0 h-full w-1/2 bg-navy-deep"
+        className="absolute left-0 top-0 h-full w-1/2 bg-[#0d0e11]"
         initial={false}
         animate={{ x: opening ? '-100%' : 0 }}
         transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
       />
       <motion.div
-        className="absolute right-0 top-0 h-full w-1/2 bg-navy-deep"
+        className="absolute right-0 top-0 h-full w-1/2 bg-[#0d0e11]"
         initial={false}
         animate={{ x: opening ? '100%' : 0 }}
         transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
@@ -76,7 +76,7 @@ export function IntroLoader() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
           <Image
-            src="/images/logo-mark.png"
+            src="/images/logo-dikey-beyaz.png"
             alt={siteConfig.name}
             width={64}
             height={64}
@@ -89,7 +89,7 @@ export function IntroLoader() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-6 text-[10px] font-semibold uppercase tracking-[0.5em] text-navy-deep-foreground/70 sm:text-xs"
+          className="mt-6 text-[10px] font-semibold uppercase tracking-[0.5em] text-[#e9e5dc]/60 sm:text-xs"
         >
           Form · Aesthetic · Soul
         </motion.p>

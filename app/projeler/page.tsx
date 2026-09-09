@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { BlueprintGrid } from '@/components/blueprint-grid'
-import { Reveal } from '@/components/reveal'
-import { ProjectsFilterGrid } from '@/components/projects/projects-filter-grid'
-import { ConsultationBanner } from '@/components/home/consultation-banner'
-import { projects } from '@/lib/data'
+import { Kapanis, Menu } from '@/components/anasayfa/bolumler'
+import { ProjeListesi } from '@/components/projeler/proje-listesi'
+import { categoryLabels, projects } from '@/lib/data'
 import { siteConfig } from '@/lib/site-config'
+import ana from '@/components/anasayfa/anasayfa.module.css'
+import s from '@/components/projeler/projeler.module.css'
 
 export const metadata: Metadata = {
   title: 'Projeler',
@@ -25,41 +25,32 @@ const projectsSchema = {
   })),
 }
 
-export default function ProjectsPage() {
+export default function ProjelerSayfasi() {
   return (
-    <>
+    <div className={ana.root}>
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectsSchema) }}
       />
-      <section className="relative overflow-hidden bg-navy-deep pt-32 pb-16">
-        <BlueprintGrid className="text-navy-deep-foreground" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-2xl">
-            <div className="mb-4 flex items-center gap-3">
-              <span className="h-px w-8 bg-primary" />
-              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-primary">
-                Portföy
-              </span>
-            </div>
-            <h1 className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-balance text-navy-deep-foreground sm:text-5xl">
-              Kahramanmaraş&apos;tan Türkiye Geneline ve Yurt Dışına Uzanan Projeler
-            </h1>
-            <p className="mt-6 text-base leading-relaxed text-pretty text-navy-deep-foreground/70 sm:text-lg">
-              Villa, toplu konut, kamu ve ticari yapı projelerimizin tamamını inceleyin.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="bg-background py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <ProjectsFilterGrid />
-        </div>
-      </section>
-
-      <ConsultationBanner />
-    </>
+      <Menu />
+      <main>
+        <section className={s.hero}>
+          <span className={`${s.mono} ${s.dim}`}>Portföy</span>
+          <h1 className={s.title}>Kahramanmaraş&apos;tan başlayıp yurt dışına uzanan yapılar.</h1>
+          <p className={s.intro}>
+            Villa, toplu konut, kamu yapısı, ticari yapı ve enerji sahaları. Her biri arsanın kendi
+            gerçeğinden çıktı; hiçbiri bir tipin kopyası değil.
+          </p>
+          <div className={`${s.meta} ${s.mono}`}>
+            <span>{projects.length} proje</span>
+            <span>{Object.keys(categoryLabels).length} kategori</span>
+            <span>2019 —</span>
+          </div>
+        </section>
+        <ProjeListesi />
+      </main>
+      <Kapanis />
+    </div>
   )
 }

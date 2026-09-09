@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { BlueprintGrid } from '@/components/blueprint-grid'
-import { Reveal } from '@/components/reveal'
-import { ServicesDetail } from '@/components/services/services-detail'
-import { ServicesFaq } from '@/components/services/services-faq'
-import { ConsultationBanner } from '@/components/home/consultation-banner'
+import { Hizmetler, Kapanis, Menu, Surec } from '@/components/anasayfa/bolumler'
+import { faqs, services } from '@/lib/data'
+import ana from '@/components/anasayfa/anasayfa.module.css'
+import proje from '@/components/projeler/projeler.module.css'
+import s from '@/components/sayfalar/sayfalar.module.css'
 
 export const metadata: Metadata = {
   title: 'Hizmetler',
@@ -12,32 +12,59 @@ export const metadata: Metadata = {
   alternates: { canonical: '/hizmetler' },
 }
 
-export default function ServicesPage() {
-  return (
-    <>
-      <section className="relative overflow-hidden bg-navy-deep pt-32 pb-16">
-        <BlueprintGrid className="text-navy-deep-foreground" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Reveal className="max-w-2xl">
-            <div className="mb-4 flex items-center gap-3">
-              <span className="h-px w-8 bg-primary" />
-              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-primary">
-                Hizmetler
-              </span>
-            </div>
-            <h1 className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-balance text-navy-deep-foreground sm:text-5xl">
-              Tasarımdan Ruhsata Uçtan Uca Mimarlık Hizmetleri
-            </h1>
-            <p className="mt-6 text-base leading-relaxed text-pretty text-navy-deep-foreground/70 sm:text-lg">
-              Konsept tasarımdan uygulama denetimine kadar sürecin her adımında yanınızdayız.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+}
 
-      <ServicesDetail />
-      <ServicesFaq />
-      <ConsultationBanner />
-    </>
+export default function HizmetlerSayfasi() {
+  return (
+    <div className={ana.root}>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <Menu />
+      <main>
+        <section className={proje.hero}>
+          <span className={`${proje.mono} ${proje.dim}`}>Hizmetler</span>
+          <h1 className={proje.title}>Tasarımdan ruhsata, uçtan uca.</h1>
+          <p className={proje.intro}>
+            Konsept tasarımdan uygulama denetimine kadar sürecin her adımındayız. Belediyeyle
+            yazışmayı, statik koordinasyonu ve şantiye takibini de biz üstleniyoruz.
+          </p>
+          <div className={`${proje.meta} ${proje.mono}`}>
+            <span>{services.length} çalışma alanı</span>
+            <span>Keşiften iskâna</span>
+            <span>Onikişubat / Kahramanmaraş</span>
+          </div>
+        </section>
+
+        <Hizmetler />
+        <Surec />
+
+        <section className={ana.section} id="sss">
+          <span className={`${s.mono} ${s.dim}`}>Sıkça sorulanlar</span>
+          <h2 className={ana.h2}>Sürecin başında en çok bunlar soruluyor.</h2>
+          <ul className={s.faq}>
+            {faqs.map((f) => (
+              <li key={f.question}>
+                <details>
+                  <summary>{f.question}</summary>
+                  <p>{f.answer}</p>
+                </details>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </main>
+      <Kapanis />
+    </div>
   )
 }

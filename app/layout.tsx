@@ -1,12 +1,10 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
-import { Plus_Jakarta_Sans, Syne, Fraunces } from 'next/font/google'
+import { Plus_Jakarta_Sans, Syne, Fraunces, Newsreader, IBM_Plex_Mono, Architects_Daughter } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
 import { CopyGuard } from '@/components/copy-guard'
 import { IntroLoader } from '@/components/intro-loader'
-import { SiteHeader } from '@/components/site-header'
-import { SiteFooter } from '@/components/site-footer'
 import { JsonLd } from '@/components/json-ld'
 import { siteConfig } from '@/lib/site-config'
 import './globals.css'
@@ -29,6 +27,30 @@ const fraunces = Fraunces({
   weight: ['400', '500', '600'],
   style: ['normal', 'italic'],
   variable: '--font-fraunces',
+  display: 'swap',
+})
+
+// Ana sayfanın tipografisi: italik serif gövde + teknik mono etiketler.
+const newsreader = Newsreader({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['200', '300', '400', '500'],
+  style: ['normal', 'italic'],
+  variable: '--font-newsreader',
+  display: 'swap',
+})
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500'],
+  variable: '--font-plex-mono',
+  display: 'swap',
+})
+
+// Kot cetveli: mimarın paftaya elle yazdığı kot gibi dursun.
+const kotYazisi = Architects_Daughter({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-kot',
   display: 'swap',
 })
 
@@ -122,13 +144,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="tr" className={`dark bg-background ${plusJakarta.variable} ${syne.variable} ${fraunces.variable}`}>
+    <html lang="tr" className={`dark bg-background ${plusJakarta.variable} ${syne.variable} ${fraunces.variable} ${newsreader.variable} ${plexMono.variable} ${kotYazisi.variable}`}>
       <body className="antialiased font-sans">
         <JsonLd />
         <IntroLoader />
-        <SiteHeader />
         <CopyGuard>{children}</CopyGuard>
-        <SiteFooter />
         <Toaster />
         {process.env.NODE_ENV === 'production' && <Analytics />}
         {process.env.NODE_ENV === 'production' && (

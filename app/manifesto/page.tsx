@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
-import { ManifestoHero } from '@/components/manifesto/manifesto-hero'
-import { ManifestoToc } from '@/components/manifesto/manifesto-toc'
-import { ManifestoSectionBlock } from '@/components/manifesto/manifesto-section'
-import { ManifestoColophon } from '@/components/manifesto/manifesto-colophon'
-import { ConsultationBanner } from '@/components/home/consultation-banner'
-import { manifestoSections, manifestoSubtitle } from '@/lib/manifesto-data'
+import { Kapanis, Menu } from '@/components/anasayfa/bolumler'
+import { ManifestoGovde } from '@/components/manifesto/manifesto-govde'
+import { manifestoSections, manifestoSubtitle, manifestoTitle } from '@/lib/manifesto-data'
+import ana from '@/components/anasayfa/anasayfa.module.css'
+import s from '@/components/manifesto/manifesto.module.css'
 
 export const metadata: Metadata = {
   title: 'Manifesto',
@@ -13,24 +12,30 @@ export const metadata: Metadata = {
 }
 
 export default function ManifestoPage() {
+  const baslik = manifestoTitle.charAt(0) + manifestoTitle.slice(1).toLocaleLowerCase('tr-TR')
+
   return (
-    <main>
-      <ManifestoHero />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[220px_1fr] lg:gap-16">
-          <ManifestoToc sections={manifestoSections} />
-
-          <div>
-            {manifestoSections.map((section, i) => (
-              <ManifestoSectionBlock key={section.id} section={section} index={i} />
-            ))}
-            <ManifestoColophon />
+    <div className={ana.root}>
+      <Menu />
+      <main>
+        <section className={s.hero}>
+          <span className={`${s.mono} ${s.eyebrow}`}>Mimari felsefe</span>
+          <h1 className={s.title}>{baslik}</h1>
+          <p className={s.subtitle}>{manifestoSubtitle}</p>
+          <p className={s.intro}>
+            On altı bölüm, on altı sorgulama. Formdan ruha, mekândan zamana — mimarlığın neden
+            yalnızca bir meslek değil, bir varoluş biçimi olduğu üzerine.
+          </p>
+          <div className={`${s.heroFoot} ${s.mono}`}>
+            <span>{manifestoSections.length} bölüm</span>
+            <span>Yazan: Mimar Batuhan Gören</span>
+            <span>Onikişubat / Kahramanmaraş</span>
           </div>
-        </div>
-      </div>
+        </section>
 
-      <ConsultationBanner />
-    </main>
+        <ManifestoGovde sections={manifestoSections} />
+      </main>
+      <Kapanis />
+    </div>
   )
 }

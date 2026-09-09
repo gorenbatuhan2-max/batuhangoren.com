@@ -1,21 +1,36 @@
-import { HeroSection } from '@/components/home/hero-section'
-import { StatsSection } from '@/components/home/stats-section'
-import { FeaturedProjectsSection } from '@/components/home/featured-projects-section'
-import { ServicesPreviewSection } from '@/components/home/services-preview-section'
-import { PhilosophySection } from '@/components/home/philosophy-section'
-import { ManifestoTeaserSection } from '@/components/home/manifesto-teaser-section'
-import { ConsultationBanner } from '@/components/home/consultation-banner'
+import { Hero } from '@/components/anasayfa/hero'
+import { KotCetveli } from '@/components/anasayfa/kot-cetveli'
+import { Dizin } from '@/components/anasayfa/dizin'
+import { TeklifFormu } from '@/components/anasayfa/teklif-formu'
+import {
+  GorselBandi,
+  Hakkinda,
+  Hizmetler,
+  Kapanis,
+  Konumlanma,
+  ManifestoIcindekiler,
+  Menu,
+  Surec,
+} from '@/components/anasayfa/bolumler'
+import s from '@/components/anasayfa/anasayfa.module.css'
 
-export default function HomePage() {
+export default function AnaSayfa() {
   return (
-    <main>
-      <HeroSection />
-      <StatsSection />
-      <FeaturedProjectsSection />
-      <ServicesPreviewSection />
-      <PhilosophySection />
-      <ManifestoTeaserSection />
-      <ConsultationBanner />
-    </main>
+    <div className={s.root}>
+      <KotCetveli />
+      <Menu />
+      <main>
+        <Hero />
+        <Konumlanma />
+        <Dizin />
+        <GorselBandi />
+        <Surec />
+        <ManifestoIcindekiler />
+        <Hizmetler />
+        <Hakkinda />
+        <TeklifFormu />
+        <Kapanis />
+      </main>
+    </div>
   )
 }

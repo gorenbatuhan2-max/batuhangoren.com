@@ -16,7 +16,7 @@ export const siteConfig = {
   url: 'https://www.batuhangoren.com',
   // İçerikte kayda değer bir güncelleme yapıldığında bu tarihi güncelleyin
   // (JSON-LD dateModified ve sitemap lastModified için kullanılıyor).
-  lastUpdated: '2026-09-07',
+  lastUpdated: '2026-09-09',
   locale: 'tr_TR',
   email: 'info@batuhangoren.com',
   phone: {
