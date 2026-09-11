@@ -43,6 +43,7 @@ function yaz(deger: number) {
 
 export function KotCetveli() {
   const [aktif, setAktif] = useState<string>('hero')
+  const aktifKot = KOTLAR.find((k) => k.id === aktif) ?? KOTLAR[0]
 
   useEffect(() => {
     let bekliyor = false
@@ -78,21 +79,30 @@ export function KotCetveli() {
   }, [])
 
   return (
-    <aside className={s.rail} aria-hidden="true">
-      <div className={s.ladder}>
-        {CETVEL.map(({ id, deger }, i) => {
-          const altindaki = CETVEL[i + 1]?.deger ?? BODRUM
-          return (
-            <Fragment key={id}>
-              <span className={`${s.tick} ${aktif === id ? s.tickOn : ''}`}>{yaz(deger)}</span>
-              {/* Boşluk, iki kot arasındaki gerçek yükseklik farkıyla orantılı. */}
-              <span className={s.aralik} style={{ flexGrow: deger - altindaki }} />
-            </Fragment>
-          )
-        })}
-        <span className={`${s.tick} ${s.tickBodrum}`}>{yaz(BODRUM)}</span>
+    <>
+      {/* Geniş ekran: tam merdiven. */}
+      <aside className={s.rail} aria-hidden="true">
+        <div className={s.ladder}>
+          {CETVEL.map(({ id, deger }, i) => {
+            const altindaki = CETVEL[i + 1]?.deger ?? BODRUM
+            return (
+              <Fragment key={id}>
+                <span className={`${s.tick} ${aktif === id ? s.tickOn : ''}`}>{yaz(deger)}</span>
+                {/* Boşluk, iki kot arasındaki gerçek yükseklik farkıyla orantılı. */}
+                <span className={s.aralik} style={{ flexGrow: deger - altindaki }} />
+              </Fragment>
+            )
+          })}
+          <span className={`${s.tick} ${s.tickBodrum}`}>{yaz(BODRUM)}</span>
+        </div>
+        <span className={s.datum}>Kot / Datum</span>
+      </aside>
+
+      {/* Dar ekran: tam merdiven yer kaplar; yalnızca aktif kot küçük bir rozet olarak kalır. */}
+      <div className={s.railMobil} aria-hidden="true">
+        <span className={s.railMobilDeger}>{yaz(aktifKot.deger)}</span>
+        <span className={s.railMobilEtiket}>Kot</span>
       </div>
-      <span className={s.datum}>Kot / Datum</span>
-    </aside>
+    </>
   )
 }

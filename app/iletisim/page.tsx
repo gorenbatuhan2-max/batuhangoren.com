@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Kapanis, Menu } from '@/components/anasayfa/bolumler'
+import { Kapanis } from '@/components/anasayfa/bolumler'
+import { Menu } from '@/components/anasayfa/menu'
 import { TeklifFormu } from '@/components/anasayfa/teklif-formu'
 import { siteConfig } from '@/lib/site-config'
 import ana from '@/components/anasayfa/anasayfa.module.css'

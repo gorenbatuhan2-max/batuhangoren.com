@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Hizmetler, Kapanis, Menu, Surec } from '@/components/anasayfa/bolumler'
+import { Hizmetler, Kapanis, Surec } from '@/components/anasayfa/bolumler'
+import { Menu } from '@/components/anasayfa/menu'
 import { faqs, services } from '@/lib/data'
 import ana from '@/components/anasayfa/anasayfa.module.css'
 import proje from '@/components/projeler/projeler.module.css'

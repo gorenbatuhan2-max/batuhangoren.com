@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Kapanis, Menu } from '@/components/anasayfa/bolumler'
+import { Kapanis } from '@/components/anasayfa/bolumler'
+import { Menu } from '@/components/anasayfa/menu'
 import { ManifestoGovde } from '@/components/manifesto/manifesto-govde'
 import { manifestoSections, manifestoSubtitle, manifestoTitle } from '@/lib/manifesto-data'
 import ana from '@/components/anasayfa/anasayfa.module.css'

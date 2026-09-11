@@ -62,12 +62,13 @@ export function Hero() {
         </span>
       </h1>
 
+      <p className={`${s.askKaynak} ${s.mono} ${s.dim}`}>
+        Mimarlık Manifestosu — I. Önsöz
+        <br />
+        <span className={s.byline}>Yazan: Mimar Batuhan Gören</span>
+      </p>
+
       <div className={`${s.heroFoot} ${s.mono} ${s.dim}`}>
-        <span>
-          Mimarlık Manifestosu — I. Önsöz
-          <br />
-          <span className={s.byline}>Yazan: Mimar Batuhan Gören</span>
-        </span>
         <span>Onikişubat / Kahramanmaraş</span>
         <span>2019 —</span>
       </div>

@@ -9,9 +9,9 @@ import {
   Kapanis,
   Konumlanma,
   ManifestoIcindekiler,
-  Menu,
   Surec,
 } from '@/components/anasayfa/bolumler'
+import { Menu } from '@/components/anasayfa/menu'
 import s from '@/components/anasayfa/anasayfa.module.css'
 
 export default function AnaSayfa() {

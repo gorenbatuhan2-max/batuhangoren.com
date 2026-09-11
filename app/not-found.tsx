@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Kapanis, Menu } from '@/components/anasayfa/bolumler'
+import { Kapanis } from '@/components/anasayfa/bolumler'
+import { Menu } from '@/components/anasayfa/menu'
 import s from '@/components/anasayfa/anasayfa.module.css'
 
 export const metadata: Metadata = {

@@ -88,6 +88,35 @@
     display: flex;
   }
 }
+/* Dar ekran: tam merdiven yerine köşede tek satırlık aktif kot rozeti. */
+.railMobil {
+  position: fixed;
+  right: 1.1rem;
+  bottom: max(1rem, env(safe-area-inset-bottom) + 0.5rem);
+  z-index: 40;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  pointer-events: none;
+}
+.railMobil .railMobilDeger {
+  font-family: var(--font-kot), 'Segoe Script', cursive;
+  font-size: 1.05rem;
+  color: var(--bone);
+  opacity: 0.85;
+}
+.railMobil .railMobilEtiket {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+@media (min-width: 1100px) {
+  .railMobil {
+    display: none;
+  }
+}
 .tick {
   position: relative;
   padding-left: 1.3rem;
@@ -186,6 +215,95 @@
   }
 }
 
+/*
+ * 3 çizgili düğme: yalnızca dar VE dikey (telefon gibi) ekranda görünür.
+ * Yatay/kare oranlı dar pencerelerde (yan çevrilmiş telefon, küçük tablet)
+ * ne liste ne düğme görünür — o genişlikte liste zaten sığmıyordu, bu satır
+ * onu değiştirmiyor.
+ */
+.navToggle {
+  display: none;
+  flex: none;
+  width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  background: 0;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: var(--bone);
+}
+.navToggle svg {
+  display: block;
+}
+.navToggle rect {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s ease;
+}
+.navToggleAcik .cizgiUst {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.navToggleAcik .cizgiOrta {
+  opacity: 0;
+}
+.navToggleAcik .cizgiAlt {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+@media (max-width: 900px) and (orientation: portrait) {
+  .navToggle {
+    display: flex;
+  }
+}
+
+/* Tam ekran mobil panel: düğmeye basınca ink zemin üstünde büyük bağlantı listesi. */
+.mobilPanel {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3rem;
+  padding: var(--pad);
+  background: var(--ink);
+  transform: translateY(-4%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.mobilPanelAcik {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.mobilPanel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+.mobilPanel a {
+  font-family: var(--font-newsreader), Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.9rem, 9vw, 2.6rem);
+  letter-spacing: -0.02em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobilPanel {
+    transition: none;
+  }
+}
+@media (max-width: 900px) and (orientation: portrait) {
+  .mobilPanel {
+    display: flex;
+  }
+}
+
 /* ── hero ── */
 .hero {
   position: relative;
@@ -260,6 +378,10 @@
 }
 .byline {
   color: rgba(233, 229, 220, 0.62);
+}
+.askKaynak {
+  margin: clamp(1rem, 3vh, 1.75rem) 0 0;
+  line-height: 1.5;
 }
 .heroFoot {
   display: flex;

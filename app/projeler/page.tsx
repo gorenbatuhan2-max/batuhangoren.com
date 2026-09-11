@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Kapanis, Menu } from '@/components/anasayfa/bolumler'
+import { Kapanis } from '@/components/anasayfa/bolumler'
+import { Menu } from '@/components/anasayfa/menu'
 import { ProjeListesi } from '@/components/projeler/proje-listesi'
 import { categoryLabels, projects } from '@/lib/data'
 import { siteConfig } from '@/lib/site-config'
