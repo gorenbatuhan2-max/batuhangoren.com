@@ -123,6 +123,14 @@
   line-height: 1.8;
   max-width: 52ch;
 }
+.not p a {
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 1px;
+  transition: border-color 0.35s ease;
+}
+.not p a:hover {
+  border-color: var(--bone);
+}
 
 /* ── iletişim bilgileri ── */
 .bilgiler {

@@ -24,6 +24,15 @@ export const categoryLabels: Record<ProjectCategory, string> = {
   enerji: 'Enerji Santralleri',
 }
 
+/** Proje kategorisinden en yakın hizmete çapraz link için eşleme. */
+export const categoryServiceSlug: Record<ProjectCategory, string> = {
+  villa: 'villa-tasarimi',
+  konut: 'cok-katli-konut',
+  kamu: 'ruhsat-uygulama',
+  ticari: 'mimari-tasarim',
+  enerji: 'gunes-enerjisi-projeleri',
+}
+
 export const projects: Project[] = [
   {
     id: 'ali-hasan-bey-cift-villasi',
@@ -295,7 +304,19 @@ export const stats = [
   { value: 25, suffix: '+', label: 'Toplam Yerinde Dönüşüm Ruhsat Sayısı' },
 ]
 
-export const services = [
+export interface Service {
+  slug: string
+  title: string
+  short: string
+  description: string
+  items: string[]
+  /** Hizmet sayfasında gösterilecek örnek proje — çapraz linkleme için. */
+  ornekProjeId?: string
+  /** İlgili rehber yazısı — çapraz linkleme için. */
+  rehberSlug?: string
+}
+
+export const services: Service[] = [
   {
     slug: 'mimari-tasarim',
     title: 'Mimari Tasarım & Proje Çizimi',
@@ -303,6 +324,7 @@ export const services = [
     description:
       'Arsa analizinden başlayarak ihtiyaç programınıza özel konsept tasarım geliştiriyor, süreci 2D kat planları ve fotogerçekçi 3D görselleştirmelerle şeffaf şekilde ilerletiyoruz.',
     items: ['Konsept tasarım ve kütle etüdü', '2D kat planı & kesit / görünüş çizimleri', 'Fotogerçekçi 3D dış-iç mekan görselleştirme', 'Malzeme ve cephe detay tasarımı'],
+    ornekProjeId: 'otel-projemiz',
   },
   {
     slug: 'villa-tasarimi',
@@ -311,6 +333,8 @@ export const services = [
     description:
       'Her aile için farklılaşan yaşam alışkanlıklarını dinleyerek, arazinin topografyasına ve manzarasına duyarlı, kişiye özel villa tasarımları üretiyoruz.',
     items: ['Kişiye özel mekan programı geliştirme', 'Arazi topografyasına duyarlı yerleşim', 'Peyzaj ve dış mekan entegrasyonu', 'Lüks malzeme ve detay küratörlüğü'],
+    ornekProjeId: 'ali-hasan-bey-cift-villasi',
+    rehberSlug: 'villa-mimari-nasil-secilir',
   },
   {
     slug: 'cok-katli-konut',
@@ -319,6 +343,7 @@ export const services = [
     description:
       'Yatırımcı ve müteahhitler için verimli daire tipolojisi, ortak alan planlaması ve ruhsat sürecini bir arada yöneten çok katlı konut projeleri geliştiriyoruz.',
     items: ['Daire tipolojisi optimizasyonu', 'Ortak alan ve otopark planlaması', 'Cephe sistemleri ve enerji verimliliği', 'Ruhsat ve imar süreci yönetimi'],
+    ornekProjeId: 'pazarcik-tip-proje',
   },
   {
     slug: 'gunes-enerjisi-projeleri',
@@ -327,6 +352,8 @@ export const services = [
     description:
       'Güneş enerji santralleri (GES), hidroelektrik santraller (HES) ve rüzgar enerji santralleri (RES) için saha yerleşim planlaması, mimari projelendirme ve ilgili izin/ruhsat süreçlerinde uçtan uca teknik hizmet sunuyoruz.',
     items: ['GES/HES/RES saha yerleşim ve mimari proje çizimi', 'Çatı ve arazi tipi güneş paneli sistemleri için statik-mimari koordinasyon', 'Enerji tesisleri için izin ve ruhsat süreç yönetimi', 'Sürdürülebilir, enerji verimli bina tasarımı entegrasyonu'],
+    ornekProjeId: 'goksun-ges',
+    rehberSlug: 'ges-projelerinde-mimari-projelendirme',
   },
   {
     slug: 'ruhsat-uygulama',
@@ -335,6 +362,8 @@ export const services = [
     description:
       'Belediye yönetmeliklerine, imar durumuna ve deprem sonrası güncellenen yapı standartlarına tam uyumlu teknik çizim ve danışmanlık hizmeti sunuyoruz.',
     items: ['İmar durumu analizi ve arsa uygunluk raporu', 'Ruhsat dosyası hazırlığı ve takibi', 'Statik / mekanik / elektrik proje koordinasyonu', 'Şantiye sahasında uygulama denetimi'],
+    ornekProjeId: 'pazarcik-belediyesi',
+    rehberSlug: 'deprem-sonrasi-ruhsat-sureci',
   },
   {
     slug: 'danismanlik',

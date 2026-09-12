@@ -23,6 +23,21 @@ export function kapak(project: Project) {
   return KAPAKLAR[project.id] ?? project.image
 }
 
+/** Kapak görseli için anahtar kelimeli alt metin: başlık + kategori + konum. */
+export function kapakAlt(project: Project) {
+  return `${project.title} — ${project.categoryLabel}, ${project.location}`
+}
+
+/**
+ * Galeri görselleri için alt metin. Sıradaki "görsel 2, görsel 3" gibi boş
+ * etiketler yerine, projenin gerçek `highlights` verisinden dönen bir
+ * açıklama kullanır — hem erişilebilirlik hem görsel arama için.
+ */
+export function galeriAlt(project: Project, index: number) {
+  const highlight = project.highlights[index % project.highlights.length]
+  return `${project.title} (${project.location}) — ${highlight}`
+}
+
 /** En güçlü işler önde: liste bir arşiv değil, bir seçki. */
 export const SIRA = [
   'pazarcik-belediyesi',

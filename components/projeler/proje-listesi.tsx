@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { categoryLabels, projects, type ProjectCategory } from '@/lib/data'
-import { cizimMi, kapak, sirala } from '@/lib/proje-kapaklari'
+import { cizimMi, kapak, kapakAlt, sirala } from '@/lib/proje-kapaklari'
 import s from './projeler.module.css'
 
 /** Portföyün tamamı, kategoriye göre süzülebilir. */
@@ -53,7 +53,7 @@ export function ProjeListesi() {
               {cizimMi(p) && <span className={`${s.etiket} ${s.mono}`}>Çizim</span>}
               <Image
                 src={kapak(p)}
-                alt={`${p.title} — ${p.categoryLabel}`}
+                alt={kapakAlt(p)}
                 fill
                 sizes="(min-width: 820px) 50vw, 100vw"
               />

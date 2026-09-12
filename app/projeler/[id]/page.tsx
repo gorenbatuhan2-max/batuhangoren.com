@@ -4,8 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Kapanis } from '@/components/anasayfa/bolumler'
 import { Menu } from '@/components/anasayfa/menu'
-import { projects } from '@/lib/data'
-import { cizimMi, kapak } from '@/lib/proje-kapaklari'
+import { categoryServiceSlug, projects, services } from '@/lib/data'
+import { cizimMi, galeriAlt, kapak, kapakAlt } from '@/lib/proje-kapaklari'
+import { rehberYazilari } from '@/lib/rehber-data'
 import { siteConfig } from '@/lib/site-config'
 import ana from '@/components/anasayfa/anasayfa.module.css'
 import s from '@/components/projeler/projeler.module.css'
@@ -50,16 +51,35 @@ export default async function ProjeDetaySayfasi({
   const galeri = (project.images ?? []).filter((src) => src !== kapak(project))
   const cizim = cizimMi(project)
 
+  const ilgiliHizmet = services.find((h) => h.slug === categoryServiceSlug[project.category])
+  const ilgiliRehber = rehberYazilari.filter((y) => y.ilgiliProjeIds.includes(project.id))
+
+  const imageObjects = [kapak(project), ...galeri].map((src, i) => ({
+    '@type': 'ImageObject',
+    contentUrl: `${siteConfig.url}${src}`,
+    name: i === 0 ? kapakAlt(project) : galeriAlt(project, i - 1),
+  }))
+
   const projectSchema = {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
     name: project.title,
     description: project.description,
     url: `${siteConfig.url}/projeler/${project.id}`,
-    image: `${siteConfig.url}${project.image}`,
+    image: imageObjects,
     locationCreated: { '@type': 'Place', name: project.location },
     creator: { '@id': `${siteConfig.url}/#founder` },
     about: { '@id': `${siteConfig.url}/#business` },
+  }
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Anasayfa', item: siteConfig.url },
+      { '@type': 'ListItem', position: 2, name: 'Projeler', item: `${siteConfig.url}/projeler` },
+      { '@type': 'ListItem', position: 3, name: project.title, item: `${siteConfig.url}/projeler/${project.id}` },
+    ],
   }
 
   return (
@@ -68,6 +88,11 @@ export default async function ProjeDetaySayfasi({
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <Menu />
       <main>
@@ -89,7 +114,7 @@ export default async function ProjeDetaySayfasi({
         <div className={`${s.kapak} ${cizim ? s.kapakCizim : ''}`}>
           <Image
             src={kapak(project)}
-            alt={`${project.title} — ${project.categoryLabel}`}
+            alt={kapakAlt(project)}
             fill
             sizes="100vw"
             priority
@@ -123,7 +148,7 @@ export default async function ProjeDetaySayfasi({
               <div className={s.kare} key={src}>
                 <Image
                   src={src}
-                  alt={`${project.title} — görsel ${i + 2}`}
+                  alt={galeriAlt(project, i)}
                   fill
                   sizes="(min-width: 900px) 33vw, 100vw"
                   loading="lazy"
@@ -142,6 +167,30 @@ export default async function ProjeDetaySayfasi({
                   <Link href={`/projeler/${p.id}`}>
                     <span>{p.title}</span>
                     <span className={`${s.mono} ${s.dim}`}>{p.location}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {(ilgiliHizmet || ilgiliRehber.length > 0) && (
+          <section className={s.benzer}>
+            <span className={`${s.mono} ${s.dim}`}>İlgili</span>
+            <ul className={s.benzerListe}>
+              {ilgiliHizmet && (
+                <li>
+                  <Link href={`/hizmetler#${ilgiliHizmet.slug}`}>
+                    <span>{ilgiliHizmet.title}</span>
+                    <span className={`${s.mono} ${s.dim}`}>Hizmet</span>
+                  </Link>
+                </li>
+              )}
+              {ilgiliRehber.map((y) => (
+                <li key={y.slug}>
+                  <Link href={`/rehber/${y.slug}`}>
+                    <span>{y.title}</span>
+                    <span className={`${s.mono} ${s.dim}`}>Rehber</span>
                   </Link>
                 </li>
               ))}

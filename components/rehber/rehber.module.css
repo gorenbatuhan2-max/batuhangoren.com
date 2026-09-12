@@ -1,0 +1,41 @@
+/*
+ * Rehber yazıları — proje sayfalarıyla aynı dil (hero, benzer/benzerListe).
+ * Burada yalnızca makale gövdesine özgü akan metin stilleri tanımlanır.
+ * Renk ve tipografi değişkenleri `anasayfa.module.css` içindeki `.root`
+ * sarmalayıcısından miras alınır.
+ */
+
+.body {
+  max-width: 68ch;
+  padding: clamp(3rem, 8vh, 5rem) var(--pad) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.1rem;
+}
+.body h2 {
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.3rem, 2.4vw, 1.85rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin: 0 0 1rem;
+}
+.body p {
+  color: rgba(233, 229, 220, 0.78);
+  line-height: 1.85;
+  margin: 0 0 1rem;
+}
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── liste satırı (özet) ── */
+.ozet {
+  display: block;
+  margin: 0.6rem 0 0;
+  font-style: normal;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: rgba(233, 229, 220, 0.6);
+  max-width: 60ch;
+}

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { services } from '@/lib/data'
+import { projects, services } from '@/lib/data'
+import { rehberYazisiGetir } from '@/lib/rehber-data'
 import { manifestoSections } from '@/lib/manifesto-data'
 import { siteConfig } from '@/lib/site-config'
 import s from './anasayfa.module.css'
@@ -132,17 +133,27 @@ export function Hizmetler() {
     <section className={s.section} id="hizmetler">
       <span className={`${s.mono} ${s.dim}`}>Hizmetler — Altı çalışma alanı</span>
       <div className={s.srv}>
-        {services.map((h) => (
-          <article key={h.slug}>
-            <h3>{h.title}</h3>
-            <p>{h.description}</p>
-            <ul>
-              {h.items.map((i) => (
-                <li key={i}>{i}</li>
-              ))}
-            </ul>
-          </article>
-        ))}
+        {services.map((h) => {
+          const ornekProje = projects.find((p) => p.id === h.ornekProjeId)
+          const rehberYazisi = h.rehberSlug ? rehberYazisiGetir(h.rehberSlug) : undefined
+          return (
+            <article key={h.slug} id={h.slug}>
+              <h3>{h.title}</h3>
+              <p>{h.description}</p>
+              <ul>
+                {h.items.map((i) => (
+                  <li key={i}>{i}</li>
+                ))}
+              </ul>
+              {(ornekProje || rehberYazisi) && (
+                <div className={s.srvLinks}>
+                  {ornekProje && <Link href={`/projeler/${ornekProje.id}`}>Örnek: {ornekProje.title}</Link>}
+                  {rehberYazisi && <Link href={`/rehber/${rehberYazisi.slug}`}>Rehber: {rehberYazisi.title}</Link>}
+                </div>
+              )}
+            </article>
+          )
+        })}
       </div>
     </section>
   )

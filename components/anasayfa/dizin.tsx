@@ -4,7 +4,7 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import Image from 'next/image'
 import Link from 'next/link'
 import { categoryLabels, projects, type Project, type ProjectCategory } from '@/lib/data'
-import { kapak, sirala } from '@/lib/proje-kapaklari'
+import { galeriAlt, kapak, kapakAlt, sirala } from '@/lib/proje-kapaklari'
 import s from './anasayfa.module.css'
 
 /**
@@ -238,7 +238,7 @@ function Panel({ project, onClose }: { project: Project; onClose: () => void }) 
         <div className={s.panelHero} data-panel-hero>
           <Image
             src={kapak(project)}
-            alt={`${project.title} — ${project.categoryLabel}`}
+            alt={kapakAlt(project)}
             fill
             sizes="(min-width: 900px) 60vw, 100vw"
           />
@@ -280,7 +280,7 @@ function Panel({ project, onClose }: { project: Project; onClose: () => void }) 
               <div className={s.shot} key={src}>
                 <Image
                   src={src}
-                  alt={`${project.title} — görsel ${i + 2}`}
+                  alt={galeriAlt(project, i)}
                   fill
                   sizes="(min-width: 900px) 15vw, 45vw"
                   loading="lazy"

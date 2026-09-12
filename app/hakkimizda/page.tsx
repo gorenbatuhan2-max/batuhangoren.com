@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { Hakkinda, Kapanis, Surec } from '@/components/anasayfa/bolumler'
 import { Menu } from '@/components/anasayfa/menu'
 import { stats, values } from '@/lib/data'
@@ -57,7 +58,9 @@ export default function HakkimizdaSayfasi() {
               </span>
               <p>
                 Köylerde yerinde dönüşüm kapsamında alınan köy evi ruhsatı. Deprem sonrası kırsalda
-                yeniden yapım, stüdyonun en az villa kadar ciddiye aldığı bir iş kalemi oldu.
+                yeniden yapım, stüdyonun en az villa kadar ciddiye aldığı bir iş kalemi oldu. Sürecin
+                nasıl işlediğini{' '}
+                <Link href="/rehber/deprem-sonrasi-ruhsat-sureci">rehber yazımızda</Link> anlattık.
               </p>
             </div>
           )}

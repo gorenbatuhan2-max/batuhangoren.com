@@ -14,6 +14,7 @@ export const SITE_BAGLANTILARI = [
   { href: '/', etiket: 'Anasayfa' },
   { href: '/projeler', etiket: 'Projeler' },
   { href: '/hizmetler', etiket: 'Hizmetler' },
+  { href: '/rehber', etiket: 'Rehber' },
   { href: '/manifesto', etiket: 'Manifesto' },
   { href: '/hakkimizda', etiket: 'Hakkımızda' },
   { href: '/iletisim', etiket: 'İletişim' },

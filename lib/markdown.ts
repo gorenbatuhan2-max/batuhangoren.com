@@ -1,5 +1,6 @@
 import { siteConfig } from '@/lib/site-config'
 import { services, faqs, projects, process, values, stats } from '@/lib/data'
+import { rehberYazilari, rehberYazisiGetir } from '@/lib/rehber-data'
 
 /**
  * text/markdown içerik pazarlığı (content negotiation) için sayfa
@@ -95,6 +96,31 @@ function aboutMarkdown(): string {
   )
 }
 
+function rehberListMarkdown(): string {
+  const lines = rehberYazilari
+    .map((y) => `- [${y.title}](${siteConfig.url}/rehber/${y.slug}) — ${y.description}`)
+    .join('\n')
+
+  return (
+    frontMatter(
+      'Rehber | Batuhan Gören Mimarlık',
+      'Villa mimarı seçimi, deprem sonrası ruhsat süreci ve GES projelerinde mimari projelendirme üzerine, stüdyonun kendi pratiğine dayanan yazılar.',
+      '/rehber',
+    ) + `\n## Yazılar\n\n${lines}\n`
+  )
+}
+
+function rehberDetailMarkdown(slug: string): string | undefined {
+  const yazi = rehberYazisiGetir(slug)
+  if (!yazi) return undefined
+
+  const govde = yazi.bolumler
+    .map((b) => (b.baslik ? `### ${b.baslik}\n\n${b.paragraflar.join('\n\n')}` : b.paragraflar.join('\n\n')))
+    .join('\n\n')
+
+  return frontMatter(yazi.title, yazi.description, `/rehber/${yazi.slug}`) + `\n${govde}\n`
+}
+
 function contactMarkdown(): string {
   return (
     frontMatter(
@@ -118,9 +144,13 @@ export function getMarkdownForPath(pathname: string): string | undefined {
   if (pathname === '/projeler') return projectsMarkdown()
   if (pathname === '/hakkimizda') return aboutMarkdown()
   if (pathname === '/iletisim') return contactMarkdown()
+  if (pathname === '/rehber') return rehberListMarkdown()
 
   const projectMatch = pathname.match(/^\/projeler\/([^/]+)$/)
   if (projectMatch) return projectDetailMarkdown(projectMatch[1])
+
+  const rehberMatch = pathname.match(/^\/rehber\/([^/]+)$/)
+  if (rehberMatch) return rehberDetailMarkdown(rehberMatch[1])
 
   return undefined
 }

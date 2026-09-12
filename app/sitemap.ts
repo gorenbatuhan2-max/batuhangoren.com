@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { siteConfig } from '@/lib/site-config'
 import { projects } from '@/lib/data'
+import { rehberYazilari } from '@/lib/rehber-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'] }[] = [
@@ -9,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/hizmetler', priority: 0.8, changeFrequency: 'monthly' },
     { path: '/manifesto', priority: 0.7, changeFrequency: 'monthly' },
     { path: '/projeler', priority: 0.9, changeFrequency: 'weekly' },
+    { path: '/rehber', priority: 0.7, changeFrequency: 'weekly' },
     { path: '/iletisim', priority: 0.7, changeFrequency: 'yearly' },
   ]
 
@@ -28,5 +30,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...staticEntries, ...projectEntries]
+  const rehberEntries: MetadataRoute.Sitemap = rehberYazilari.map((yazi) => ({
+    url: `${siteConfig.url}/rehber/${yazi.slug}`,
+    lastModified: yazi.updatedAt ?? yazi.publishedAt,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  return [...staticEntries, ...projectEntries, ...rehberEntries]
 }
