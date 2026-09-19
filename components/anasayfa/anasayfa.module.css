@@ -367,7 +367,17 @@
     animation: none;
   }
 }
+/* h1 artık iki katman: üstte künye satırı, altında sorunun kendisi. */
+.h1 {
+  margin: 0;
+  font-weight: inherit;
+}
+.h1Kimlik {
+  display: block;
+  margin-bottom: clamp(0.85rem, 2.2vh, 1.4rem);
+}
 .ask {
+  display: block;
   font-style: italic;
   font-weight: 200;
   font-size: clamp(3.2rem, 13.5vw, 11rem);

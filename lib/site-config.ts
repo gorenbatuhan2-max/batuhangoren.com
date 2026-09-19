@@ -16,7 +16,7 @@ export const siteConfig = {
   url: 'https://www.batuhangoren.com',
   // İçerikte kayda değer bir güncelleme yapıldığında bu tarihi güncelleyin
   // (JSON-LD dateModified ve sitemap lastModified için kullanılıyor).
-  lastUpdated: '2026-09-09',
+  lastUpdated: '2026-09-19',
   locale: 'tr_TR',
   email: 'info@batuhangoren.com',
   phone: {
@@ -42,6 +42,38 @@ export const siteConfig = {
     linkedin: 'https://www.linkedin.com/in/batuhan-goren-2879b03a9/',
     linktree: 'https://link.batuhangoren.com/',
   },
+  // Stüdyonun kayıtlı olduğu üçüncü taraf firma rehberleri. Schema.org `sameAs`
+  // üzerinden bildirildiğinde arama motorları ve LLM'ler bu profillerle site
+  // arasındaki kimlik bağını kurabiliyor (entity reconciliation).
+  directories: [
+    'https://www.aratsana.com/firma/batuhan-goren-mimarlik-2n7r',
+    'https://iyifirma.com/batuhan-goren-mimarlik-insaat-taahhut-ticaret-ve-sanayi-limited-sirketi/',
+  ],
+  // Stüdyonun kuruluş yılı — LocalBusiness `foundingDate` ve "kaç yıldır"
+  // sorularının cevabı buradan türetiliyor.
+  foundingYear: 2019,
+  // DOĞRULANMALI: Google İşletme Profili'ndeki saatlerle birebir aynı olmalı.
+  // Şu an varsayılan ofis saatleri girili; farklıysa burayı düzeltmek yeterli
+  // (LocalBusiness `openingHoursSpecification` buradan üretiliyor).
+  openingHours: [
+    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' },
+    { days: ['Saturday'], opens: '10:00', closes: '16:00' },
+  ],
+  // Stüdyonun fiilen proje yürüttüğü yerleşimler. Yerel arama ve "X ilçesinde
+  // mimar" sorularında `areaServed` olarak bildiriliyor.
+  serviceAreas: [
+    'Onikişubat',
+    'Dulkadiroğlu',
+    'Türkoğlu',
+    'Pazarcık',
+    'Elbistan',
+    'Afşin',
+    'Göksun',
+    'Ekinözü',
+    'Andırın',
+    'Çağlayancerit',
+    'Nurhak',
+  ],
   mapsUrl: 'https://maps.app.goo.gl/vRNBuEvcyzDSQGpp7',
   mapsEmbedUrl: 'https://www.google.com/maps?cid=9015557454168528375&output=embed',
   geo: {

@@ -55,10 +55,19 @@ export function Hero() {
         sorar:
       </p>
 
-      <h1 className={s.ask}>
-        <span className={s.reveal}>Sen</span>{' '}
-        <span className={s.reveal}>
-          <em>kimsin</em>?
+      {/* Sayfanın tek h1'i. Sorunun kendisi görsel olarak ayakta kalırken,
+          üstündeki künye satırı başlığın kim/nerede bilgisini de taşıyor:
+          "Sen kimsin?" tek başına ne arama motoruna ne de bir asistana bu
+          sayfanın bir Kahramanmaraş mimarlık ofisine ait olduğunu söylüyordu. */}
+      <h1 className={s.h1}>
+        <span className={`${s.h1Kimlik} ${s.mono} ${s.dim}`}>
+          Batuhan Gören Mimarlık — Onikişubat / Kahramanmaraş mimarlık ofisi
+        </span>
+        <span className={s.ask}>
+          <span className={s.reveal}>Sen</span>{' '}
+          <span className={s.reveal}>
+            <em>kimsin</em>?
+          </span>
         </span>
       </h1>
 
@@ -69,7 +78,7 @@ export function Hero() {
       </p>
 
       <div className={`${s.heroFoot} ${s.mono} ${s.dim}`}>
-        <span>Onikişubat / Kahramanmaraş</span>
+        <span>Villa · Konut · Kamu yapısı · Enerji sahası</span>
         <span>2019 —</span>
       </div>
     </section>

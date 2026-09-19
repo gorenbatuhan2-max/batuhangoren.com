@@ -104,7 +104,7 @@ function rehberListMarkdown(): string {
   return (
     frontMatter(
       'Rehber | Batuhan Gören Mimarlık',
-      'Villa mimarı seçimi, deprem sonrası ruhsat süreci ve GES projelerinde mimari projelendirme üzerine, stüdyonun kendi pratiğine dayanan yazılar.',
+      "Kahramanmaraş'ta mimar seçimi, villa yaptırma süreci, ruhsat işlemleri ve enerji sahası projelendirmesi üzerine, stüdyonun kendi pratiğine dayanan yazılar.",
       '/rehber',
     ) + `\n## Yazılar\n\n${lines}\n`
   )
@@ -115,10 +115,20 @@ function rehberDetailMarkdown(slug: string): string | undefined {
   if (!yazi) return undefined
 
   const govde = yazi.bolumler
-    .map((b) => (b.baslik ? `### ${b.baslik}\n\n${b.paragraflar.join('\n\n')}` : b.paragraflar.join('\n\n')))
+    .map((b) => {
+      const metin = b.paragraflar.join('\n\n')
+      const liste = b.liste ? `\n\n${b.liste.map((m) => `- ${m}`).join('\n')}` : ''
+      return (b.baslik ? `### ${b.baslik}\n\n${metin}` : metin) + liste
+    })
     .join('\n\n')
 
-  return frontMatter(yazi.title, yazi.description, `/rehber/${yazi.slug}`) + `\n${govde}\n`
+  const sss = yazi.sorular?.length
+    ? `\n\n## Sıkça Sorulan Sorular\n\n${yazi.sorular
+        .map((q) => `**${q.soru}**\n\n${q.cevap}`)
+        .join('\n\n')}`
+    : ''
+
+  return frontMatter(yazi.title, yazi.description, `/rehber/${yazi.slug}`) + `\n${govde}${sss}\n`
 }
 
 function contactMarkdown(): string {

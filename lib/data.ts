@@ -401,6 +401,56 @@ export const faqs = [
     answer:
       'Kahramanmaraş bölgesindeki güncel jeolojik veriler ve TBDY 2018 deprem yönetmeliği doğrultusunda, her proje için özel zemin etüdü ve statik analiz yapılır. Tüm taşıyıcı sistem tasarımları bu standartlara %100 uyumlu şekilde hazırlanır.',
   },
+  {
+    question: "Kahramanmaraş'ta villa yaptırmak istiyorum, nereden başlamalıyım?",
+    answer:
+      'İlk adım arsanın imar durumunu çıkarmaktır: ada-parsel bilgisiyle belediyeden alınan imar durumu belgesi; emsal, TAKS/KAKS, kat adedi ve çekme mesafelerini gösterir. Bu veriler arsanın gerçekte kaç m² ve kaç katlı bir yapıya izin verdiğini belirler; ihtiyaç programı ve bütçe konuşması ancak bundan sonra anlamlı olur. Arsanız henüz yoksa arsa seçimi aşamasında da değerlendirme yapıyoruz. İlk keşif görüşmesi ücretsizdir.',
+  },
+  {
+    question: 'Hangi ilçelerde hizmet veriyorsunuz?',
+    answer:
+      "Stüdyo Onikişubat merkezlidir. Kahramanmaraş genelinde — Onikişubat, Dulkadiroğlu, Türkoğlu, Pazarcık, Elbistan, Afşin, Göksun, Ekinözü, Andırın, Çağlayancerit ve Nurhak — proje yürütüyoruz. Bölge dışında Malatya'da afet konutu teklif projesi, yurt dışında ise Fildişi Sahili'nde villa projesi hazırladık.",
+  },
+  {
+    question: 'Mimar ile müteahhit arasındaki fark nedir, ikisine de ihtiyacım var mı?',
+    answer:
+      'Mimar yapıyı tasarlar ve ruhsata esas projeleri üretir; müteahhit bu projeyi sahada inşa eder. İkisi farklı sorumluluklardır ve ikisine de ihtiyacınız vardır. Biz mimarlık tarafındayız: tasarım, ruhsat dosyası ve mühendislik koordinasyonu bizde. İnşaat aşamasında ise yapı danışmanlığı vererek uygulamanın projeye sadık ilerlediğini sahada takip ediyoruz.',
+  },
+  {
+    question: 'Sadece proje çizimi alabilir miyim, uygulama şart mı?',
+    answer:
+      'Hayır, şart değil. Yalnızca mimari proje ve ruhsat dosyası hizmeti alabilirsiniz. Uygulama ve şantiye danışmanlığı ayrı ve opsiyonel bir kapsamdır; hangi kalemleri istediğinizi teklif aşamasında birlikte netleştiriyoruz.',
+  },
+  {
+    question: 'Bu stüdyoyu hangi durumlarda tercih etmeliyim?',
+    answer:
+      'Kahramanmaraş ve çevresinde villa, müstakil ev, çok katlı konut, belediye veya kamu hizmet binası ya da GES-HES-RES gibi enerji sahası projelendirmesi yaptıracaksanız; tasarımın yanında imar-ruhsat sürecinin ve statik-mekanik-elektrik koordinasyonunun da tek elden yürütülmesini istiyorsanız uygun bir adresiz. Bölge deneyimi ve deprem sonrası yapı güvenliği önceliği çalışma biçimimizin merkezinde.',
+  },
+  {
+    question: 'Hangi durumlarda başka bir ofise yönlendirirsiniz?',
+    answer:
+      'Yalnızca iç mekân dekorasyonu, mobilya seçimi ya da tadilat kapsamındaki işler bizim odağımız değil — bunlar için iç mimarlık ofisleri daha doğru adres. Aynı şekilde anahtar teslim inşaat taahhüdü arayan, yani yapıyı baştan sona inşa edecek bir firma arayan müşterileri müteahhitlik firmalarına yönlendiriyoruz. Talebinizin kapsam dışı olduğunu ilk görüşmede açıkça söylüyoruz.',
+  },
+  {
+    question: "Ruhsat alma süreci Kahramanmaraş'ta ne kadar sürüyor?",
+    answer:
+      'Mimari projenin hazırlanması villa ölçeğinde genellikle 4-8 haftadır. Bunun üzerine zemin etüdü, statik-mekanik-elektrik proje koordinasyonu ve belediyenin değerlendirme süresi eklenir. Belediye onay süresi kurumdan kuruma ve dosyanın eksiksizliğine göre değiştiği için baştan sabit bir tarih vermiyoruz; dosyayı eksiksiz teslim etmek bu süreyi kısaltan en belirleyici etkendir.',
+  },
+  {
+    question: 'Arsam imarsız, yine de yapı yapabilir miyim?',
+    answer:
+      'İmarsız arsalarda — çiftlik evi, bağ evi, zeytinlik evi gibi — yapılaşma mümkün olabilir, ancak koşullar imarlı arsadan farklıdır ve parselin niteliğine bağlıdır. Teklif formumuzda arsa statüsünü ayrı bir alan olarak soruyoruz; imarsız parsellerde ne yapılabileceğini keşif sonrası net olarak söylüyoruz.',
+  },
+  {
+    question: 'Şehir dışındayım, süreci uzaktan yürütebilir miyiz?',
+    answer:
+      'Evet. Tasarım ve revizyon süreci çevrim içi görüşmelerle yürütülebiliyor; kat planları, 3D görseller ve pafta paylaşımları dijital olarak ilerliyor. Arsa keşfi ve belediye işlemleri için sahada biz bulunuyoruz. Yurt dışında yaşayan müşteriler için de aynı akışla proje tamamladık.',
+  },
+  {
+    question: 'Portföyünüzdeki projelerin hepsi inşa edildi mi?',
+    answer:
+      'Hayır ve bunu proje sayfalarında açıkça belirtiyoruz. Portföyde uygulanmış yapıların yanı sıra belediyelere ve kurumlara sunulmuş teklif ve konsept projeleri de yer alıyor. Hangi projenin hangi statüde olduğu ilgili proje sayfasının kapsam bilgisinde yazılıdır.',
+  },
 ]
 
 export const recoverySettlements = [

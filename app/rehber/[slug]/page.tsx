@@ -65,6 +65,21 @@ export default async function RehberYazisiSayfasi({
     about: ilgiliHizmetler.map((h) => ({ '@type': 'Thing', name: h.title })),
   }
 
+  // Yazının kendi soru-cevapları ayrı bir FAQPage olarak bildiriliyor: soru
+  // biçimli aramalarda ve asistan yanıtlarında alıntılanan blok bu.
+  const faqSchema = yazi.sorular?.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        '@id': `${siteConfig.url}/rehber/${yazi.slug}#sss`,
+        mainEntity: yazi.sorular.map((q) => ({
+          '@type': 'Question',
+          name: q.soru,
+          acceptedAnswer: { '@type': 'Answer', text: q.cevap },
+        })),
+      }
+    : null
+
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -87,6 +102,13 @@ export default async function RehberYazisiSayfasi({
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <Menu />
       <main>
         <section className={proje.hero}>
@@ -115,9 +137,33 @@ export default async function RehberYazisiSayfasi({
               {b.paragraflar.map((p) => (
                 <p key={p.slice(0, 40)}>{p}</p>
               ))}
+              {b.liste && (
+                <ul className={rb.liste}>
+                  {b.liste.map((madde) => (
+                    <li key={madde.slice(0, 40)}>{madde}</li>
+                  ))}
+                </ul>
+              )}
             </div>
           ))}
         </div>
+
+        {yazi.sorular && yazi.sorular.length > 0 && (
+          <section className={rb.sorular} id="sss">
+            <span className={`${proje.mono} ${proje.dim}`}>Sıkça sorulanlar</span>
+            <h2 className={rb.sorularBaslik}>Bu konuda en çok sorulanlar</h2>
+            <ul className={rb.sorularListe}>
+              {yazi.sorular.map((q) => (
+                <li key={q.soru}>
+                  <details>
+                    <summary>{q.soru}</summary>
+                    <p>{q.cevap}</p>
+                  </details>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {(ilgiliHizmetler.length > 0 || ilgiliProjeler.length > 0) && (
           <section className={proje.benzer}>
