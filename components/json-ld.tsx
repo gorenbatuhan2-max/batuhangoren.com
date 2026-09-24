@@ -79,6 +79,13 @@ export function JsonLd() {
     currenciesAccepted: 'TRY',
     foundingDate: String(siteConfig.foundingYear),
     hasMap: siteConfig.mapsUrl,
+    // Google Bilgi Grafiği'ndeki varlık kimliği: harita kaydıyla birleşmenin
+    // en doğrudan, makinece okunur kanıtı.
+    identifier: {
+      '@type': 'PropertyValue',
+      propertyID: 'Google Knowledge Graph ID',
+      value: siteConfig.googleBusiness.kgId,
+    },
     openingHoursSpecification,
     geo: {
       '@type': 'GeoCoordinates',
@@ -88,6 +95,7 @@ export function JsonLd() {
     address: {
       '@type': 'PostalAddress',
       streetAddress: siteConfig.address.streetAddress,
+      postalCode: siteConfig.address.postalCode,
       addressLocality: siteConfig.address.district,
       addressRegion: siteConfig.address.region,
       addressCountry: siteConfig.address.country,
@@ -118,6 +126,7 @@ export function JsonLd() {
       siteConfig.social.linkedin,
       siteConfig.social.linktree,
       siteConfig.mapsUrl,
+      `https://www.google.com/search?kgmid=${siteConfig.googleBusiness.kgId}`,
       ...siteConfig.directories,
     ].filter(Boolean),
   }

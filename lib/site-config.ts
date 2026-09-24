@@ -28,9 +28,13 @@ export const siteConfig = {
     number: '905387005191',
     href: 'https://wa.me/905387005191?text=Merhaba%2C%20projem%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum.',
   },
+  // `streetAddress` Google İşletme Profili'ndeki adres satırıyla harfi harfine aynı
+  // tutulmalı; harita ↔ site eşleşmesi bu metin üzerinden de kuruluyor. Apartman
+  // adı GBP adresinde yok, bu yüzden yalnızca yol tarifinde geçiyor.
   address: {
-    streetAddress: 'Cumhuriyet Mahallesi, Gazi Osman Paşa Bulvarı, Nur Apartmanı No: 7/A',
-    directions: 'Çevre, Şehircilik Müdürlüğü karşısı, yokuş devamı.',
+    streetAddress: 'Cumhuriyet Mah. Gaziosmanpaşa Bulvarı No:7/A',
+    directions: 'Nur Apartmanı — Çevre, Şehircilik Müdürlüğü karşısı, yokuş devamı.',
+    postalCode: '46050',
     district: 'Onikişubat',
     city: 'Kahramanmaraş',
     region: 'Kahramanmaraş',
@@ -74,7 +78,16 @@ export const siteConfig = {
     'Çağlayancerit',
     'Nurhak',
   ],
-  mapsUrl: 'https://maps.app.goo.gl/vRNBuEvcyzDSQGpp7',
+  // Google İşletme Profili kimlikleri: `cid` harita kaydının kalıcı numarası,
+  // `kgId` Google Bilgi Grafiği'ndeki varlık kimliği. JSON-LD bunlarla sitedeki
+  // işletmeyi haritadaki kayıtla aynı varlık olarak bağlıyor.
+  googleBusiness: {
+    cid: '9015557454168528375',
+    kgId: '/g/11pzx5vp8v',
+  },
+  // Kısa paylaşım linki (maps.app.goo.gl) yerine doğrudan CID adresi: yönlendirme
+  // zinciri yok, tarayıcılar ve LLM'ler kaydı tek adımda çözebiliyor.
+  mapsUrl: 'https://www.google.com/maps?cid=9015557454168528375',
   mapsEmbedUrl: 'https://www.google.com/maps?cid=9015557454168528375&output=embed',
   geo: {
     latitude: 37.5945891,
