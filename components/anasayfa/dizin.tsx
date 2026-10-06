@@ -25,13 +25,14 @@ const KISA_ETIKET: Record<ProjectCategory, string> = {
   konut: 'Konut',
   kamu: 'Kamu',
   ticari: 'Ticari',
+  endustriyel: 'Endüstriyel',
   enerji: 'Enerji',
 }
 
 const SIRALI: Project[] = sirala(projects)
 
 type Filtre = 'all' | ProjectCategory
-const KATEGORILER: Filtre[] = ['all', 'villa', 'konut', 'kamu', 'ticari', 'enerji']
+const KATEGORILER: Filtre[] = ['all', 'villa', 'konut', 'kamu', 'ticari', 'endustriyel', 'enerji']
 
 export function Dizin() {
   const [filtre, setFiltre] = useState<Filtre>('all')

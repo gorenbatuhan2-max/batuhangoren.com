@@ -16,6 +16,7 @@ const tabs: { key: ProjectCategory | 'tumu'; label: string }[] = [
   { key: 'konut', label: categoryLabels.konut },
   { key: 'kamu', label: categoryLabels.kamu },
   { key: 'ticari', label: categoryLabels.ticari },
+  { key: 'endustriyel', label: categoryLabels.endustriyel },
   { key: 'enerji', label: categoryLabels.enerji },
 ]
 

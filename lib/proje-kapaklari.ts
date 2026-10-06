@@ -51,6 +51,7 @@ export const SIRA = [
   'pazarcik-tip-proje',
   'turkoglu-tip-proje',
   'shell-yani-kafe',
+  'goksun-findik-paketleme-su-uretim-tesisi',
   'goksun-ges',
   'narli-ges',
 ]
@@ -62,7 +63,7 @@ export function sirala(projects: Project[]): Project[] {
   ]
 }
 
-/** GES paftaları render değil çizim; kırpılmadan gösterilmeleri gerekiyor. */
+/** GES ve endüstriyel tesis paftaları render değil çizim; kırpılmadan gösterilmeleri gerekiyor. */
 export function cizimMi(project: Project) {
-  return project.category === 'enerji'
+  return project.category === 'enerji' || project.category === 'endustriyel'
 }

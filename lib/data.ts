@@ -1,4 +1,4 @@
-export type ProjectCategory = 'villa' | 'konut' | 'kamu' | 'ticari' | 'enerji'
+export type ProjectCategory = 'villa' | 'konut' | 'kamu' | 'ticari' | 'endustriyel' | 'enerji'
 
 export interface Project {
   id: string
@@ -21,6 +21,7 @@ export const categoryLabels: Record<ProjectCategory, string> = {
   konut: 'Toplu Konut & Tip Proje',
   kamu: 'Kamu & Kurumsal Yapılar',
   ticari: 'Ticari & Turizm Yapıları',
+  endustriyel: 'Endüstriyel Yapılar',
   enerji: 'Enerji Santralleri',
 }
 
@@ -30,6 +31,7 @@ export const categoryServiceSlug: Record<ProjectCategory, string> = {
   konut: 'cok-katli-konut',
   kamu: 'ruhsat-uygulama',
   ticari: 'mimari-tasarim',
+  endustriyel: 'ruhsat-uygulama',
   enerji: 'gunes-enerjisi-projeleri',
 }
 
@@ -253,6 +255,27 @@ export const projects: Project[] = [
       'Fildişi Sahili\'nde hayata geçirilen bu proje, stüdyomuzun Kahramanmaraş dışına ve yurt dışına uzanan mimari projelendirme kapasitesini gösteriyor. Tuğla cephe dokusu, ahşap latis detayları ve geniş balkonlarıyla villa, sıcak iklime uygun gölgeli açık alanlar sunuyor.',
     highlights: ['İki katlı, balkonlu müstakil villa kütlesi', 'Tuğla ve ahşap latis cephe malzeme dili', 'Sıcak iklime uygun gölgelendirme çözümleri', 'Yurt dışı ölçekli mimari projelendirme referansı'],
     scope: ['Konsept Tasarım', 'Mimari Proje', '3D Görselleştirme'],
+  },
+  {
+    id: 'goksun-findik-paketleme-su-uretim-tesisi',
+    title: 'Göksun Fındık Paketleme ve Su Üretim Tesisi',
+    category: 'endustriyel',
+    categoryLabel: categoryLabels.endustriyel,
+    location: 'Göksun / Kahramanmaraş',
+    year: '',
+    area: '≈ 12.000 m²',
+    image: '/images/project-goksun-findik-su-tesisi.jpg',
+    images: ['/images/project-goksun-findik-su-tesisi.jpg', '/images/project-goksun-findik-su-tesisi-2.jpg'],
+    summary: 'Yaklaşık 12.000 m² inşaat alanıyla fındık paketleme ve su üretimini aynı parselde buluşturan endüstriyel tesis.',
+    description:
+      'Göksun\'da yaklaşık 12.000 m² inşaat alanına sahip bu tesisle bölgemize değer kazandırıyoruz. Fındık paketleme ve su üretim birimlerini bir araya getiren proje, birbirine bağlanan üretim holleri ve destek bloklarından oluşuyor. Kütleler arazinin eğimine göre kademelendirilerek yerleştirildi; üretim akışı, yükleme-boşaltma ve servis dolaşımı baştan planlanarak verimli bir yerleşim kurgulandı. Tesis, Göksun\'un tarımsal ürününü ve su kaynağını yerinde işleyerek ilçe ekonomisine ve istihdamına katkı sunmayı hedefliyor.',
+    highlights: [
+      'Yaklaşık 12.000 m² inşaat alanı',
+      'Fındık paketleme ve su üretimini birleştiren çok bloklu yerleşim',
+      'Arazi eğimine göre kademelendirilen üretim holleri',
+      'Üretim akışı, yükleme ve servis dolaşımına göre kurgulanan vaziyet planı',
+    ],
+    scope: ['Vaziyet Planı', 'Mimari Uygulama Projesi', '3D Modelleme'],
   },
   {
     id: 'goksun-ges',

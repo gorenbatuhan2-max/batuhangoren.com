@@ -40,7 +40,7 @@ export default function ProjelerSayfasi() {
           <span className={`${s.mono} ${s.dim}`}>Portföy</span>
           <h1 className={s.title}>Kahramanmaraş&apos;tan başlayıp yurt dışına uzanan yapılar.</h1>
           <p className={s.intro}>
-            Villa, toplu konut, kamu yapısı, ticari yapı ve enerji sahaları. Her biri arsanın kendi
+            Villa, toplu konut, kamu yapısı, ticari yapı, endüstriyel tesis ve enerji sahaları. Her biri arsanın kendi
             gerçeğinden çıktı; hiçbiri bir tipin kopyası değil.
           </p>
           <div className={`${s.meta} ${s.mono}`}>

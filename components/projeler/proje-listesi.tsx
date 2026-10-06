@@ -11,7 +11,7 @@ import s from './projeler.module.css'
 const SIRALI = sirala(projects)
 
 type Filtre = 'all' | ProjectCategory
-const KATEGORILER: Filtre[] = ['all', 'villa', 'konut', 'kamu', 'ticari', 'enerji']
+const KATEGORILER: Filtre[] = ['all', 'villa', 'konut', 'kamu', 'ticari', 'endustriyel', 'enerji']
 
 export function ProjeListesi() {
   const [filtre, setFiltre] = useState<Filtre>('all')
