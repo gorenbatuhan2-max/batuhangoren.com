@@ -21,7 +21,7 @@
   margin: 0 0 1rem;
 }
 .body p {
-  color: rgba(233, 229, 220, 0.78);
+  color: rgb(var(--yazi-rgb) / 0.78);
   line-height: 1.85;
   margin: 0 0 1rem;
 }
@@ -36,7 +36,7 @@
   font-style: normal;
   font-size: 0.98rem;
   line-height: 1.6;
-  color: rgba(233, 229, 220, 0.6);
+  color: rgb(var(--yazi-rgb) / 0.6);
   max-width: 60ch;
 }
 
@@ -54,7 +54,7 @@
 .liste li {
   position: relative;
   padding-left: 1.5rem;
-  color: rgba(233, 229, 220, 0.78);
+  color: rgb(var(--yazi-rgb) / 0.78);
   line-height: 1.8;
 }
 .liste li::before {
@@ -92,7 +92,7 @@
   line-height: 1.55;
 }
 .sorularListe p {
-  color: rgba(233, 229, 220, 0.78);
+  color: rgb(var(--yazi-rgb) / 0.78);
   line-height: 1.85;
   margin: 0 0 1.2rem;
 }

@@ -6,11 +6,11 @@ import { useReducedMotion } from 'framer-motion'
 import s from './anasayfa.module.css'
 
 /**
- * Hero — boşluk.
+ * Hero — mekân ve soru.
  *
- * Manifestonun açılış sorusu neredeyse boş bir ekranda duruyor. Fildişi Sahili
- * villasının perspektifi arkada yalnızca sezilir; sayfa aşağı kaydıkça
- * `--emerge` değeriyle karanlıktan çıkar.
+ * Fildişi Sahili villasının perspektifi tam renkli ve net, bir pafta gibi
+ * çerçevede duruyor; manifestonun açılış sorusu onun üstünde. Sayfa aşağı
+ * kaydıkça `--emerge` değeriyle görsel hafifçe geri çekilir.
  */
 export function Hero() {
   const ref = useRef<HTMLElement>(null)
@@ -39,8 +39,8 @@ export function Hero() {
   }, [reduce])
 
   return (
-    <section className={s.hero} id="hero" ref={ref}>
-      <div className={s.heroGhost} aria-hidden="true">
+    <section className={`${s.hero} ${s.fotoUstu}`} id="hero" ref={ref}>
+      <div className={s.heroFoto} aria-hidden="true">
         <Image
           src="/images/project-fildisi-sahili-villa-6.jpg"
           alt=""

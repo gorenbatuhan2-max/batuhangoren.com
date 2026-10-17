@@ -24,10 +24,10 @@ export default function AnaSayfa() {
         <Konumlanma />
         <Dizin />
         <GorselBandi />
-        <Surec />
+        <Surec ozet />
         <ManifestoIcindekiler />
-        <Hizmetler />
-        <Hakkinda />
+        <Hizmetler ozet />
+        <Hakkinda ozet />
         <TeklifFormu />
         <Kapanis />
       </main>

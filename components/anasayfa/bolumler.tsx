@@ -4,6 +4,7 @@ import { projects, services } from '@/lib/data'
 import { rehberYazisiGetir } from '@/lib/rehber-data'
 import { manifestoSections } from '@/lib/manifesto-data'
 import { siteConfig } from '@/lib/site-config'
+import { cizimMi, kapak, kapakAlt } from '@/lib/proje-kapaklari'
 import s from './anasayfa.module.css'
 
 /** Konumlanma — hero'nun sorusundan sonra ne iş yaptığımızı söyleyen bant. */
@@ -49,7 +50,7 @@ export function Konumlanma() {
  */
 export function GorselBandi() {
   return (
-    <div className={s.widePlate}>
+    <div className={`${s.widePlate} ${s.fotoUstu}`}>
       <Image
         src="/images/project-goksun-ges-5.png"
         alt="Göksun Güneş Enerji Santrali — iki vaziyet planını taşıyan birleşik proje paftası"
@@ -71,37 +72,44 @@ const ADIMLAR = [
     baslik: 'Keşif & arsa analizi',
     metin:
       'İmar durumu, emsal, çekme mesafeleri ve zemin verisi. Arsanın gerçekte ne verdiğini çıkarıyoruz.',
+    kisa: 'İmar, emsal ve zemin verisi.',
   },
   {
     n: '02',
     baslik: 'Konsept & 3D model',
     metin:
       'Kütle kararları ve cephe dili. Kâğıttaki fikrin inşa edilebilir bir forma indiği aşama.',
+    kisa: 'Kütle ve cephe kararları.',
   },
   {
     n: '03',
     baslik: 'Uygulama & statik',
     metin:
       'Mimari uygulama projesi, statik koordinasyonu ve ruhsat dosyasının belediyeye teslimi.',
+    kisa: 'Uygulama projesi ve ruhsat dosyası.',
   },
   {
     n: '04',
     baslik: 'Yapı danışmanlığı',
     metin: 'Şantiye sürecinde detay çözümü, malzeme seçimi ve iskâna kadar takip.',
+    kisa: 'Şantiyeden iskâna takip.',
   },
 ]
 
-/** Süreç — sırası gerçekten bilgi taşıdığı için numaralı. */
-export function Surec() {
+/**
+ * Süreç — sırası gerçekten bilgi taşıdığı için numaralı.
+ * `ozet`: ana sayfada her adım tek satır; açıklamanın tamamı alt sayfalarda.
+ */
+export function Surec({ ozet = false }: { ozet?: boolean }) {
   return (
     <section className={s.section} id="surec">
       <span className={`${s.mono} ${s.dim}`}>Süreç — Keşiften iskâna</span>
-      <div className={s.steps}>
+      <div className={`${s.steps} ${ozet ? s.stepsKisa : ''}`}>
         {ADIMLAR.map((a) => (
           <div className={s.step} key={a.n}>
             <span className={`${s.mono} ${s.dim}`}>{a.n}</span>
             <h3>{a.baslik}</h3>
-            <p>{a.metin}</p>
+            <p>{ozet ? a.kisa : a.metin}</p>
           </div>
         ))}
       </div>
@@ -115,7 +123,7 @@ export function Surec() {
  */
 export function ManifestoIcindekiler() {
   return (
-    <section className={s.section} id="manifesto">
+    <section className={`${s.section} ${s.koyu}`} id="manifesto">
       <span className={`${s.mono} ${s.dim}`}>Mimarlık Manifestosu</span>
       <h2 className={s.h2}>Mimarlık, taşınan bir meslek değil. Algı mekanizmasının kendisi.</h2>
       <div className={`${s.acts} ${s.ruled}`}>
@@ -127,8 +135,60 @@ export function ManifestoIcindekiler() {
   )
 }
 
-/** Hizmetler — lib/data.ts içindeki altı çalışma alanının tamamı. */
-export function Hizmetler() {
+/**
+ * Örnek projesi olmayan hizmetlerin ana sayfa kartı için görsel kaynağı.
+ * Veri katmanındaki `ornekProjeId`'ye dokunmuyor; /hizmetler'deki "Örnek:"
+ * bağlantısı bundan etkilenmez.
+ */
+const KART_GORSELI_YEDEK: Record<string, string> = {
+  danismanlik: 'avgasir-villa',
+}
+
+/**
+ * Hizmetler — lib/data.ts içindeki altı çalışma alanının tamamı.
+ * `ozet`: ana sayfada her alan bir görsel kart (örnek projesinin kapağı, başlık,
+ * tek cümle) ve /hizmetler'deki ayrıntısına bağlanır. /hizmetler tam hâli kullanır;
+ * JSON-LD'nin işaret ettiği `#slug` çıpaları orada.
+ */
+export function Hizmetler({ ozet = false }: { ozet?: boolean }) {
+  if (ozet) {
+    return (
+      <section className={s.section} id="hizmetler">
+        <span className={`${s.mono} ${s.dim}`}>Hizmetler — Altı çalışma alanı</span>
+        <ul className={s.srvKartlar}>
+          {services.map((h) => {
+            const ornekProje = projects.find(
+              (p) => p.id === (h.ornekProjeId ?? KART_GORSELI_YEDEK[h.slug]),
+            )
+            const cizim = ornekProje ? cizimMi(ornekProje) : false
+            return (
+              <li key={h.slug}>
+                <Link className={s.srvKart} href={`/hizmetler#${h.slug}`}>
+                  <span className={`${s.kartGorsel} ${s.srvGorsel} ${cizim ? s.kartCizim : ''}`}>
+                    {ornekProje && (
+                      <Image
+                        src={kapak(ornekProje)}
+                        alt={kapakAlt(ornekProje)}
+                        fill
+                        sizes="(min-width: 1100px) 28vw, (min-width: 620px) 45vw, 100vw"
+                        loading="lazy"
+                      />
+                    )}
+                  </span>
+                  <h3>{h.title}</h3>
+                  <p>{h.short}</p>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+        <div className={s.acts}>
+          <Link href="/hizmetler">Altı alanın ayrıntısı →</Link>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section className={s.section} id="hizmetler">
       <span className={`${s.mono} ${s.dim}`}>Hizmetler — Altı çalışma alanı</span>
@@ -159,32 +219,50 @@ export function Hizmetler() {
   )
 }
 
-/** Hakkında — stüdyo. */
-export function Hakkinda() {
+/**
+ * Hakkında — stüdyo.
+ * `ozet`: ana sayfada tek paragraf ve /hakkimizda'ya bağlantı; üç paragrafın
+ * tamamı orada.
+ */
+export function Hakkinda({ ozet = false }: { ozet?: boolean }) {
   return (
     <section className={s.section} id="hakkinda">
       <span className={`${s.mono} ${s.dim}`}>Hakkında — Stüdyo</span>
       <h2 className={s.h2}>Yerel karaktere sadık, modern standartlara bağlı.</h2>
       <div className={s.aboutGrid}>
         <div>
-          <div className={s.cols}>
-            <p>
-              {siteConfig.name}, Onikişubat merkezli bir mimarlık stüdyosudur. Pratiğini
-              Kahramanmaraş&apos;ta kurmuş; bölgenin arazi yapısını, yerel malzeme kültürünü ve
-              iklim koşullarını yakından tanıyarak çalışmaktadır. Bu birikim, her projede modern
-              tasarım dilinin yerel gerçeklerle dengelenmesini sağlar.
-            </p>
-            <p>
-              2023 depremlerinin ardından yapı güvenliği stüdyonun ilk çalışma önceliği hâline
-              gelmiştir. Tasarlanan her yapı, güncel deprem yönetmeliğine harfiyen uyumlu ve titiz
-              bir statik süreçten geçirilerek uygulamaya hazırlanır.
-            </p>
-            <p>
-              Stüdyonun hedefi, Onikişubat ve çevresindeki ailelere yalnızca estetik değil; güvenli,
-              işleyen ve uzun ömürlü yaşam alanları sunmaktır. Mimarlık Manifestosu, bu yaklaşımın
-              arkasındaki düşünceyi kayıt altına alır.
-            </p>
-          </div>
+          {ozet ? (
+            <>
+              <p className={s.aboutTek}>
+                {siteConfig.name}, Onikişubat merkezli bir mimarlık stüdyosudur. Bölgenin
+                arazisini, yerel malzemesini ve iklimini tanıyarak çalışır; 2023 depremlerinden bu
+                yana tasarladığı her yapıyı güncel deprem yönetmeliğine tam uyumlu bir statik
+                süreçten geçirir.
+              </p>
+              <div className={s.acts}>
+                <Link href="/hakkimizda">Stüdyoyu tanıyın →</Link>
+              </div>
+            </>
+          ) : (
+            <div className={s.cols}>
+              <p>
+                {siteConfig.name}, Onikişubat merkezli bir mimarlık stüdyosudur. Pratiğini
+                Kahramanmaraş&apos;ta kurmuş; bölgenin arazi yapısını, yerel malzeme kültürünü ve
+                iklim koşullarını yakından tanıyarak çalışmaktadır. Bu birikim, her projede modern
+                tasarım dilinin yerel gerçeklerle dengelenmesini sağlar.
+              </p>
+              <p>
+                2023 depremlerinin ardından yapı güvenliği stüdyonun ilk çalışma önceliği hâline
+                gelmiştir. Tasarlanan her yapı, güncel deprem yönetmeliğine harfiyen uyumlu ve titiz
+                bir statik süreçten geçirilerek uygulamaya hazırlanır.
+              </p>
+              <p>
+                Stüdyonun hedefi, Onikişubat ve çevresindeki ailelere yalnızca estetik değil; güvenli,
+                işleyen ve uzun ömürlü yaşam alanları sunmaktır. Mimarlık Manifestosu, bu yaklaşımın
+                arkasındaki düşünceyi kayıt altına alır.
+              </p>
+            </div>
+          )}
           <div className={`${s.facts} ${s.mono} ${s.dim}`}>
             <span>
               <b>9+</b> yıl deneyim
@@ -216,7 +294,7 @@ export function Hakkinda() {
 /** Kapanış — doğrudan hatlar. */
 export function Kapanis() {
   return (
-    <section className={s.son} id="iletisim">
+    <section className={`${s.son} ${s.koyu}`} id="iletisim">
       <h2 className={s.sonH2}>Konuşalım.</h2>
       <div className={s.lines}>
         <a href={siteConfig.phone.href}>{siteConfig.phone.display}</a>

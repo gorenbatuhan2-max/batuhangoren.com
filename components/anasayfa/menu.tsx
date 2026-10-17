@@ -55,7 +55,7 @@ export function Menu({
     <header className={`${s.nav} ${s.mono}`}>
       <Link className={s.brand} href="/" aria-label={`${siteConfig.name} — ana sayfa`}>
         <Image
-          src="/images/logo-yatay-beyaz.png"
+          src="/images/logo-yatay-siyah.png"
           alt={siteConfig.name}
           width={900}
           height={206}

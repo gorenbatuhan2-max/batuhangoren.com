@@ -1,20 +1,19 @@
 'use client'
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { categoryLabels, projects, type Project, type ProjectCategory } from '@/lib/data'
-import { galeriAlt, kapak, kapakAlt, sirala } from '@/lib/proje-kapaklari'
+import { cizimMi, galeriAlt, kapak, kapakAlt, sirala } from '@/lib/proje-kapaklari'
 import s from './anasayfa.module.css'
 
 /**
- * Dizin — yapı listesi.
+ * Dizin — yapı ızgarası.
  *
- * Bir satırın üzerine gelince görseli sağdaki sabit çerçevede belirir. Satıra
- * tıklayınca aynı görsel panelde büyüyerek açılır; altında projenin diğer
- * görselleri ve bilgileri gelir. Panel listenin içinde durduğu için aşağı
- * kaydırmaya devam edildiğinde liste kaldığı yerden sürer. Soldaki dikey çentik
- * paneli kapatır, görsel küçülerek çekilir ve önizleme çerçevesine geri döner.
+ * Her yapı kendi kapak görseliyle bir kart. Karta tıklayınca aynı görsel,
+ * kartın bulunduğu satırın hemen altında tam genişlik bir panelde büyüyerek
+ * açılır; altında projenin diğer görselleri ve bilgileri gelir. Izgara panelin
+ * altından kaldığı yerden sürer. Soldaki dikey çentik paneli kapatır.
  */
 
 /** Panelin kapanış geçişi süresi (ms) — CSS ile aynı kalmalı. */
@@ -34,13 +33,35 @@ const SIRALI: Project[] = sirala(projects)
 type Filtre = 'all' | ProjectCategory
 const KATEGORILER: Filtre[] = ['all', 'villa', 'konut', 'kamu', 'ticari', 'endustriyel', 'enerji']
 
+/**
+ * Izgaranın o anki sütun sayısı. Panel, açılan kartın satırının sonuna
+ * yerleştirildiği için bunu bilmek gerekiyor. Kırılımlar CSS'teki `.kartlar`
+ * ile aynı kalmalı.
+ */
+function useSutunSayisi() {
+  const [sutun, setSutun] = useState(3)
+  useEffect(() => {
+    const genis = window.matchMedia('(min-width: 1100px)')
+    const orta = window.matchMedia('(min-width: 620px)')
+    const guncelle = () => setSutun(genis.matches ? 3 : orta.matches ? 2 : 1)
+    guncelle()
+    genis.addEventListener('change', guncelle)
+    orta.addEventListener('change', guncelle)
+    return () => {
+      genis.removeEventListener('change', guncelle)
+      orta.removeEventListener('change', guncelle)
+    }
+  }, [])
+  return sutun
+}
+
 export function Dizin() {
   const [filtre, setFiltre] = useState<Filtre>('all')
-  const [hover, setHover] = useState<string | null>(null)
   const [acik, setAcik] = useState<string | null>(null)
   /** Kapanış geçişi bitene kadar DOM'da kalması gereken proje. */
   const [cikan, setCikan] = useState<string | null>(null)
   const zamanlayici = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const sutun = useSutunSayisi()
 
   const gorunen = useMemo(
     () => (filtre === 'all' ? SIRALI : SIRALI.filter((p) => p.category === filtre)),
@@ -56,7 +77,6 @@ export function Dizin() {
     setAcik((id) => {
       if (!id) return null
       setCikan(id)
-      setHover(id) // görsel önizleme çerçevesine geri dönsün
       if (zamanlayici.current) clearTimeout(zamanlayici.current)
       zamanlayici.current = setTimeout(() => setCikan(null), KAPANIS_SURESI)
       return null
@@ -79,7 +99,7 @@ export function Dizin() {
 
   useEffect(() => () => { if (zamanlayici.current) clearTimeout(zamanlayici.current) }, [])
 
-  // Süzgeç açık projeyi listeden çıkarırsa panel de kapanmalı.
+  // Süzgeç açık projeyi ızgaradan çıkarırsa panel de kapanmalı.
   useEffect(() => {
     if (acik && !gorunen.some((p) => p.id === acik)) kapat()
   }, [acik, gorunen, kapat])
@@ -93,7 +113,15 @@ export function Dizin() {
     return () => window.removeEventListener('keydown', onKey)
   }, [acik, kapat])
 
-  const onizleme = acik ? null : gorunen.find((p) => p.id === hover) ?? null
+  /** Bir projenin panelinin, ızgarada hangi kartın ardına geleceği: satırın son kartı. */
+  const satirSonu = (id: string | null) => {
+    const i = id ? gorunen.findIndex((p) => p.id === id) : -1
+    if (i < 0) return -1
+    return Math.min(gorunen.length - 1, Math.floor(i / sutun) * sutun + sutun - 1)
+  }
+  const paneller = [cikan, acik]
+    .filter((id): id is string => Boolean(id))
+    .map((id) => ({ id, sonra: satirSonu(id) }))
 
   return (
     <section className={s.section} id="dizin">
@@ -118,49 +146,53 @@ export function Dizin() {
         ))}
       </div>
 
-      <div
-        className={`${s.dizinGrid} ${acik ? s.dizinAcik : ''} ${hover && !acik ? s.dimmed : ''}`}
-        onMouseLeave={() => setHover(null)}
-      >
-        <ul className={s.list}>
-          {gorunen.map((p) => {
-            const isOpen = acik === p.id
-            const render = isOpen || cikan === p.id
-            return (
-              <li key={p.id}>
+      <ul className={s.kartlar}>
+        {gorunen.map((p, j) => {
+          const isOpen = acik === p.id
+          const cizim = cizimMi(p)
+          return (
+            <Fragment key={p.id}>
+              <li className={s.kartOge}>
                 <button
                   type="button"
-                  className={`${s.row} ${isOpen ? s.rowOpen : ''}`}
+                  className={`${s.kart} ${isOpen ? s.kartAcik : ''}`}
                   aria-expanded={isOpen}
-                  aria-controls={`panel-${p.id}`}
-                  onMouseEnter={() => setHover(p.id)}
-                  onFocus={() => setHover(p.id)}
+                  aria-controls={isOpen ? `panel-${p.id}` : undefined}
                   onClick={() => (isOpen ? kapat() : ac(p.id))}
                 >
-                  <span className={s.no} aria-hidden="true" />
-                  <span className={s.rowTitle}>{p.title}</span>
-                  <span className={`${s.mono} ${s.dim}`}>{KISA_ETIKET[p.category]}</span>
+                  <span className={`${s.kartGorsel} ${cizim ? s.kartCizim : ''}`}>
+                    <Image
+                      src={kapak(p)}
+                      alt={kapakAlt(p)}
+                      fill
+                      sizes="(min-width: 1100px) 28vw, (min-width: 620px) 45vw, 100vw"
+                    />
+                    {cizim && <span className={`${s.kartEtiket} ${s.mono}`}>Çizim</span>}
+                  </span>
+                  <span className={s.kartAlt}>
+                    <span className={s.no} aria-hidden="true" />
+                    <span className={s.kartBaslik}>{p.title}</span>
+                    <span className={`${s.mono} ${s.dim}`}>{KISA_ETIKET[p.category]}</span>
+                  </span>
                 </button>
-
-                <Akordeon id={`panel-${p.id}`} open={isOpen}>
-                  {render ? <Panel project={p} onClose={kapat} /> : null}
-                </Akordeon>
               </li>
-            )
-          })}
-        </ul>
 
-        <div className={s.frame} aria-hidden="true">
-          {onizleme && (
-            <>
-              <Image key={onizleme.id} src={kapak(onizleme)} alt="" fill sizes="30vw" />
-              <span className={`${s.frameCap} ${s.mono}`}>
-                {onizleme.title} — {onizleme.categoryLabel}
-              </span>
-            </>
-          )}
-        </div>
-      </div>
+              {paneller
+                .filter((pn) => pn.sonra === j)
+                .map((pn) => {
+                  const proje = gorunen.find((x) => x.id === pn.id)!
+                  return (
+                    <li className={s.panelSatir} key={`panel-${pn.id}`}>
+                      <Akordeon id={`panel-${pn.id}`} open={acik === pn.id}>
+                        <Panel project={proje} onClose={kapat} />
+                      </Akordeon>
+                    </li>
+                  )
+                })}
+            </Fragment>
+          )
+        })}
+      </ul>
     </section>
   )
 }
