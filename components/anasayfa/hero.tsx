@@ -1,86 +1,83 @@
-'use client'
-
-import { useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { useReducedMotion } from 'framer-motion'
+import Link from 'next/link'
+import { projects } from '@/lib/data'
 import s from './anasayfa.module.css'
 
+const KAPAK_PROJESI = projects.find((p) => p.id === 'afrika-fildisi-sahili-villa')
+
 /**
- * Hero — mekân ve soru.
+ * Hero — soru ve mekân.
  *
- * Fildişi Sahili villasının perspektifi tam renkli ve net, bir pafta gibi
- * çerçevede duruyor; manifestonun açılış sorusu onun üstünde. Sayfa aşağı
- * kaydıkça `--emerge` değeriyle görsel hafifçe geri çekilir.
+ * Üstte manifestonun açılış sorusu ve giriş cümlesi iki sütunda; altında
+ * Fildişi Sahili villasının perspektifi geniş bir pafta gibi, künyesiyle
+ * birlikte duruyor.
  */
 export function Hero() {
-  const ref = useRef<HTMLElement>(null)
-  const reduce = useReducedMotion()
-
-  useEffect(() => {
-    if (reduce) return
-    const el = ref.current
-    if (!el) return
-
-    let ticking = false
-    const apply = () => {
-      const oran = Math.min(1, Math.max(0, window.scrollY / el.offsetHeight))
-      el.style.setProperty('--emerge', oran.toFixed(3))
-      ticking = false
-    }
-    const onScroll = () => {
-      if (ticking) return
-      ticking = true
-      requestAnimationFrame(apply)
-    }
-
-    apply()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [reduce])
-
   return (
-    <section className={`${s.hero} ${s.fotoUstu}`} id="hero" ref={ref}>
-      <div className={s.heroFoto} aria-hidden="true">
+    <section className={s.hero} id="hero">
+      <div className={`${s.heroUst} ${s.mono} ${s.dim}`}>
+        <span>Mimarlık Manifestosu — I. Önsöz</span>
+        <span>Onikişubat / Kahramanmaraş</span>
+      </div>
+
+      <div className={s.heroBaslik}>
+        {/* Sayfanın tek h1'i. Sorunun kendisi görsel olarak ayakta kalırken,
+            üstündeki künye satırı başlığın kim/nerede bilgisini de taşıyor:
+            "Sen kimsin?" tek başına ne arama motoruna ne de bir asistana bu
+            sayfanın bir Kahramanmaraş mimarlık ofisine ait olduğunu söylüyordu. */}
+        <h1 className={s.h1}>
+          <span className={`${s.h1Kimlik} ${s.mono} ${s.dim}`}>
+            Batuhan Gören Mimarlık — Onikişubat / Kahramanmaraş mimarlık ofisi
+          </span>
+          <span className={s.ask}>
+            <span className={s.reveal}>Sen</span>{' '}
+            <span className={s.reveal}>
+              <em>kimsin</em>?
+            </span>
+          </span>
+        </h1>
+
+        <div className={s.heroYan}>
+          <p className={s.lead}>
+            Bir an vardır ki insan kendini bir mekânın içinde bulur. Mekânı sorgularken, mekân ona
+            sorar.
+          </p>
+          <span className={`${s.byline} ${s.mono} ${s.dim}`}>Yazan: Mimar Batuhan Gören</span>
+          <a className={s.okLink} href="#dizin">
+            Yapıları gör <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
+
+      <figure className={`${s.heroFoto} ${s.harc}`} data-derz>
         <Image
           src="/images/project-fildisi-sahili-villa-6.jpg"
-          alt=""
+          alt={
+            KAPAK_PROJESI
+              ? `${KAPAK_PROJESI.title} — ${KAPAK_PROJESI.categoryLabel}, ${KAPAK_PROJESI.location}`
+              : ''
+          }
           fill
           priority
-          sizes="100vw"
+          sizes="(min-width: 1100px) calc(100vw - 15rem), 100vw"
         />
-      </div>
-
-      <p className={s.lead}>
-        Bir an vardır ki insan kendini bir mekânın içinde bulur. Mekânı sorgularken, mekân ona
-        sorar:
-      </p>
-
-      {/* Sayfanın tek h1'i. Sorunun kendisi görsel olarak ayakta kalırken,
-          üstündeki künye satırı başlığın kim/nerede bilgisini de taşıyor:
-          "Sen kimsin?" tek başına ne arama motoruna ne de bir asistana bu
-          sayfanın bir Kahramanmaraş mimarlık ofisine ait olduğunu söylüyordu. */}
-      <h1 className={s.h1}>
-        <span className={`${s.h1Kimlik} ${s.mono} ${s.dim}`}>
-          Batuhan Gören Mimarlık — Onikişubat / Kahramanmaraş mimarlık ofisi
-        </span>
-        <span className={s.ask}>
-          <span className={s.reveal}>Sen</span>{' '}
-          <span className={s.reveal}>
-            <em>kimsin</em>?
-          </span>
-        </span>
-      </h1>
-
-      <p className={`${s.askKaynak} ${s.mono} ${s.dim}`}>
-        Mimarlık Manifestosu — I. Önsöz
-        <br />
-        <span className={s.byline}>Yazan: Mimar Batuhan Gören</span>
-      </p>
-
-      <div className={`${s.heroFoot} ${s.mono} ${s.dim}`}>
-        <span>Villa · Konut · Kamu yapısı · Enerji sahası</span>
-        <span>2019 —</span>
-      </div>
+        {KAPAK_PROJESI && (
+          <figcaption className={`${s.heroKunye} ${s.fotoUstu}`}>
+            <span className={`${s.mono} ${s.dim}`}>Öne çıkan // {KAPAK_PROJESI.categoryLabel}</span>
+            <Link href={`/projeler/${KAPAK_PROJESI.id}`} className={s.heroKunyeBaslik}>
+              {KAPAK_PROJESI.title}
+            </Link>
+            <span className={s.etiketler}>
+              <span className={s.etiket}>{KAPAK_PROJESI.location}</span>
+              {KAPAK_PROJESI.scope.slice(0, 2).map((k) => (
+                <span className={s.etiket} key={k}>
+                  {k}
+                </span>
+              ))}
+            </span>
+          </figcaption>
+        )}
+      </figure>
     </section>
   )
 }

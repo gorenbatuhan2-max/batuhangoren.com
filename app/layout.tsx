@@ -1,7 +1,15 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
-import { Plus_Jakarta_Sans, Syne, Fraunces, Newsreader, IBM_Plex_Mono, Architects_Daughter } from 'next/font/google'
+import {
+  Plus_Jakarta_Sans,
+  Syne,
+  Fraunces,
+  Newsreader,
+  IBM_Plex_Mono,
+  Architects_Daughter,
+  Playfair_Display,
+} from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
 import { CopyGuard } from '@/components/copy-guard'
 import { IntroLoader } from '@/components/intro-loader'
@@ -10,7 +18,7 @@ import { siteConfig } from '@/lib/site-config'
 import './globals.css'
 
 const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-plus-jakarta',
   display: 'swap',
 })
@@ -43,6 +51,15 @@ const plexMono = IBM_Plex_Mono({
   subsets: ['latin', 'latin-ext'],
   weight: ['400', '500'],
   variable: '--font-plex-mono',
+  display: 'swap',
+})
+
+// Başlıklar: yayın tipografisi gibi düz, normal ağırlıkta serif; vurgu kelimesi italik.
+const playfair = Playfair_Display({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500'],
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
   display: 'swap',
 })
 
@@ -153,7 +170,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="tr" className={`dark bg-background ${plusJakarta.variable} ${syne.variable} ${fraunces.variable} ${newsreader.variable} ${plexMono.variable} ${kotYazisi.variable}`}>
+    <html lang="tr" className={`dark bg-background ${plusJakarta.variable} ${syne.variable} ${fraunces.variable} ${newsreader.variable} ${plexMono.variable} ${kotYazisi.variable} ${playfair.variable}`}>
       <body className="antialiased font-sans">
         <JsonLd />
         <IntroLoader />

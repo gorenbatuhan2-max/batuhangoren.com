@@ -12,8 +12,9 @@ const DOSYA_METNI = 'Dosya seçmek için tıklayın — PDF, JPG, PNG, en fazla 
 /**
  * İletişim formu. Alan adları `app/api/contact/route.ts` ile birebir aynı;
  * yalnızca görünüm ana sayfanın diline uyarlandı.
+ * `ozet`: ana sayfada yan metin tek cümle; /iletisim tam hâlini kullanır.
  */
-export function TeklifFormu() {
+export function TeklifFormu({ ozet = false }: { ozet?: boolean }) {
   const [durum, setDurum] = useState<'bos' | 'gonderiliyor' | 'gonderildi'>('bos')
   const [il, setIl] = useState(VARSAYILAN_IL)
   const [dosya, setDosya] = useState<string | null>(null)
@@ -42,17 +43,23 @@ export function TeklifFormu() {
       <div className={s.formGrid}>
         {durum !== 'gonderildi' && (
           <div className={s.formAside}>
-            <p>
-              Arsanın konumunu ve elinizdeki belgeleri baştan paylaşırsanız ilk görüşmede çok daha
-              net konuşuruz. Eskiz, tapu fotoğrafı, imar durumu — hangisi varsa.
-            </p>
-            <p>
-              Henüz arsa bakıyorsanız da yazın. Satın almadan önce yapılabilirlik okumak, sonradan
-              proje revize etmekten ucuza gelir.
-            </p>
+            {ozet ? (
+              <p>Eskiz, tapu ya da imar durumu; hangisi varsa ekleyin.</p>
+            ) : (
+              <>
+                <p>
+                  Arsanın konumunu ve elinizdeki belgeleri baştan paylaşırsanız ilk görüşmede çok
+                  daha net konuşuruz. Eskiz, tapu fotoğrafı, imar durumu — hangisi varsa.
+                </p>
+                <p>
+                  Henüz arsa bakıyorsanız da yazın. Satın almadan önce yapılabilirlik okumak,
+                  sonradan proje revize etmekten ucuza gelir.
+                </p>
+              </>
+            )}
             <div className={`${s.formNote} ${s.mono}`}>
               <p>
-                Form doldurmak istemezseniz doğrudan arayın:
+                {ozet ? 'Ya da arayın:' : 'Form doldurmak istemezseniz doğrudan arayın:'}
                 <br />
                 <a href={siteConfig.phone.href}>{siteConfig.phone.display}</a>
               </p>

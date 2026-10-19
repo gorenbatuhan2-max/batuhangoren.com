@@ -7,14 +7,14 @@
 
 .body {
   max-width: 68ch;
-  padding: clamp(3rem, 8vh, 5rem) var(--pad) 0;
+  padding: clamp(3rem, 8vh, 5rem) var(--kenar) 0;
   display: flex;
   flex-direction: column;
   gap: 2.1rem;
 }
 .body h2 {
-  font-style: italic;
-  font-weight: 300;
+  font-family: var(--serif);
+  font-weight: 400;
   font-size: clamp(1.3rem, 2.4vw, 1.85rem);
   line-height: 1.25;
   letter-spacing: -0.015em;
@@ -67,11 +67,11 @@
 /* ── yazıya özel soru-cevaplar ── */
 .sorular {
   max-width: 68ch;
-  padding: clamp(3.5rem, 9vh, 5.5rem) var(--pad) 0;
+  padding: clamp(3.5rem, 9vh, 5.5rem) var(--kenar) 0;
 }
 .sorularBaslik {
-  font-style: italic;
-  font-weight: 300;
+  font-family: var(--serif);
+  font-weight: 400;
   font-size: clamp(1.3rem, 2.4vw, 1.85rem);
   line-height: 1.25;
   letter-spacing: -0.015em;

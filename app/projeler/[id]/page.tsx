@@ -111,7 +111,7 @@ export default async function ProjeDetaySayfasi({
           </div>
         </section>
 
-        <div className={`${s.kapak} ${cizim ? s.kapakCizim : ''}`}>
+        <div className={`${s.kapak} ${cizim ? s.kapakCizim : ''} ${ana.harc}`} data-derz>
           <Image
             src={kapak(project)}
             alt={kapakAlt(project)}

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { siteConfig } from '@/lib/site-config'
+import { BetonDerz } from './beton-derz'
 import s from './anasayfa.module.css'
 
 /**
@@ -53,6 +54,8 @@ export function Menu({
 
   return (
     <header className={`${s.nav} ${s.mono}`}>
+      {/* Her sayfada menü var; beton derz ölçüsü de buradan kurulur. */}
+      <BetonDerz />
       <Link className={s.brand} href="/" aria-label={`${siteConfig.name} — ana sayfa`}>
         <Image
           src="/images/logo-yatay-siyah.png"
@@ -71,7 +74,9 @@ export function Menu({
         ))}
       </ul>
 
-      <span className={s.dim}>{siteConfig.address.city}</span>
+      <Link className={s.navCta} href="/iletisim">
+        Proje başlat
+      </Link>
 
       <button
         type="button"
