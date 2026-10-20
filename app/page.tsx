@@ -1,6 +1,5 @@
 import { Hero } from '@/components/anasayfa/hero'
 import { KotCetveli } from '@/components/anasayfa/kot-cetveli'
-import { Dizin } from '@/components/anasayfa/dizin'
 import { TeklifFormu } from '@/components/anasayfa/teklif-formu'
 import {
   GorselBandi,
@@ -9,6 +8,7 @@ import {
   Kapanis,
   Konumlanma,
   ManifestoIcindekiler,
+  OneCikanlar,
   Surec,
 } from '@/components/anasayfa/bolumler'
 import { Menu } from '@/components/anasayfa/menu'
@@ -22,13 +22,13 @@ export default function AnaSayfa() {
       <main>
         <Hero />
         <Konumlanma />
-        <Dizin />
+        <OneCikanlar />
         <GorselBandi />
-        <Surec />
+        <Surec ozet />
         <ManifestoIcindekiler />
-        <Hizmetler />
-        <Hakkinda />
-        <TeklifFormu />
+        <Hizmetler ozet />
+        <Hakkinda ozet />
+        <TeklifFormu ozet />
         <Kapanis />
       </main>
     </div>

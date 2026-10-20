@@ -7,21 +7,21 @@
 
 .body {
   max-width: 68ch;
-  padding: clamp(3rem, 8vh, 5rem) var(--pad) 0;
+  padding: clamp(3rem, 8vh, 5rem) var(--kenar) 0;
   display: flex;
   flex-direction: column;
   gap: 2.1rem;
 }
 .body h2 {
-  font-style: italic;
-  font-weight: 300;
+  font-family: var(--serif);
+  font-weight: 400;
   font-size: clamp(1.3rem, 2.4vw, 1.85rem);
   line-height: 1.25;
   letter-spacing: -0.015em;
   margin: 0 0 1rem;
 }
 .body p {
-  color: rgba(233, 229, 220, 0.78);
+  color: rgb(var(--yazi-rgb) / 0.78);
   line-height: 1.85;
   margin: 0 0 1rem;
 }
@@ -36,7 +36,7 @@
   font-style: normal;
   font-size: 0.98rem;
   line-height: 1.6;
-  color: rgba(233, 229, 220, 0.6);
+  color: rgb(var(--yazi-rgb) / 0.6);
   max-width: 60ch;
 }
 
@@ -54,7 +54,7 @@
 .liste li {
   position: relative;
   padding-left: 1.5rem;
-  color: rgba(233, 229, 220, 0.78);
+  color: rgb(var(--yazi-rgb) / 0.78);
   line-height: 1.8;
 }
 .liste li::before {
@@ -67,11 +67,11 @@
 /* ── yazıya özel soru-cevaplar ── */
 .sorular {
   max-width: 68ch;
-  padding: clamp(3.5rem, 9vh, 5.5rem) var(--pad) 0;
+  padding: clamp(3.5rem, 9vh, 5.5rem) var(--kenar) 0;
 }
 .sorularBaslik {
-  font-style: italic;
-  font-weight: 300;
+  font-family: var(--serif);
+  font-weight: 400;
   font-size: clamp(1.3rem, 2.4vw, 1.85rem);
   line-height: 1.25;
   letter-spacing: -0.015em;
@@ -81,10 +81,8 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--hair);
 }
 .sorularListe li {
-  border-bottom: 1px solid var(--hair);
 }
 .sorularListe summary {
   cursor: pointer;
@@ -92,7 +90,7 @@
   line-height: 1.55;
 }
 .sorularListe p {
-  color: rgba(233, 229, 220, 0.78);
+  color: rgb(var(--yazi-rgb) / 0.78);
   line-height: 1.85;
   margin: 0 0 1.2rem;
 }

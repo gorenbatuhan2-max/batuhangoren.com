@@ -111,7 +111,7 @@ export default async function ProjeDetaySayfasi({
           </div>
         </section>
 
-        <div className={`${s.kapak} ${cizim ? s.kapakCizim : ''}`}>
+        <div className={`${s.kapak} ${cizim ? s.kapakCizim : ''} ${ana.harc}`} data-derz>
           <Image
             src={kapak(project)}
             alt={kapakAlt(project)}
@@ -143,9 +143,9 @@ export default async function ProjeDetaySayfasi({
         </div>
 
         {galeri.length > 0 && (
-          <div className={s.galeri}>
+          <div className={s.galeri} data-derz>
             {galeri.map((src, i) => (
-              <div className={s.kare} key={src}>
+              <div className={`${s.kare} ${i % 2 ? ana.harcB : ana.harc}`} key={src}>
                 <Image
                   src={src}
                   alt={galeriAlt(project, i)}
