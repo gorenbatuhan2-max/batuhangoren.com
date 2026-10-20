@@ -68,7 +68,7 @@ export default function IletisimSayfasi() {
 
         <section className={ana.section} id="konum-harita">
           <span className={`${s.mono} ${s.dim}`}>Stüdyonun konumu</span>
-          <div className={s.harita}>
+          <div className={`${s.harita} ${ana.harc}`} data-derz>
             <iframe
               src={siteConfig.mapsEmbedUrl}
               title={`${siteConfig.name} — stüdyo konumu`}

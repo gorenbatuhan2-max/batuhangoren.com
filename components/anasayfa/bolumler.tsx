@@ -25,7 +25,7 @@ export function Konumlanma() {
             <Link href="/manifesto">Manifestoyu oku →</Link>
           </div>
         </div>
-        <ul className={s.sayilar}>
+        <ul className={s.sayilar} data-derz>
           <li>
             <b>50+</b>
             <span className={s.mono}>Proje ve teklif</span>
@@ -189,7 +189,8 @@ export function Surec({ ozet = false }: { ozet?: boolean }) {
     <section className={s.section} id="surec">
       <span className={`${s.mono} ${s.dim}`}>Süreç — Keşiften iskâna</span>
       {ozet && <h2 className={s.h2}>Dört adımda yapı.</h2>}
-      <div className={`${s.steps} ${ozet ? s.stepsKisa : ''}`}>
+      {/* Ana sayfada adımların kalın üst çizgisi derze oturur. */}
+      <div className={`${s.steps} ${ozet ? s.stepsKisa : ''}`} data-derz={ozet ? '' : undefined}>
         {ADIMLAR.map((a) => (
           <div className={s.step} key={a.n}>
             <span className={ozet ? s.adimNo : `${s.mono} ${s.dim}`}>{a.n}</span>

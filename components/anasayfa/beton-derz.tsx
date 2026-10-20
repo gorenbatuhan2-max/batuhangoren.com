@@ -16,8 +16,9 @@ const GENIS = '(min-width: 700px)'
  * panel katına yuvarlar. Öğelerin eni ve boyu zaten CSS'te panel katı olduğu
  * için dört köşe de derz çizgisine denk gelir.
  *
- * Hesap her seferinde öğenin kendi eklentisi çıkarılarak yapılır, yani aynı
- * düzende iki kez çalışması aynı sonucu verir; boyut gözlemcisi döngüye girmez.
+ * Her çalışmada eklentiler sıfırlanıp aynı karede yeniden yazılır, yani aynı
+ * düzende iki kez çalışması aynı sonucu verir; kök boyutu değişmediği için
+ * boyut gözlemcisi döngüye girmez.
  */
 export function BetonDerz() {
   useEffect(() => {
@@ -38,13 +39,24 @@ export function BetonDerz() {
       kok.style.setProperty('--panel-h', `${panelH}px`)
       kok.style.setProperty('--derz-x', `${icerik.left}px`)
 
+      const ustu = (el: HTMLElement) => el.getBoundingClientRect().top - kok.getBoundingClientRect().top
+
       // Belge sırasıyla: her eklenti sonrakileri aşağı iter, o yüzden tek tek ölçülür.
       for (const el of kok.querySelectorAll<HTMLElement>('[data-derz]')) {
         if (el.dataset.derz === 'blok') el.style.minHeight = ''
-        const ek = parseFloat(el.style.getPropertyValue('--derz-ek')) || 0
-        const ust = el.getBoundingClientRect().top - kok.getBoundingClientRect().top - ek
-        const yeni = Math.ceil((ust - 0.5) / panelH) * panelH - ust
-        if (Math.abs(yeni - ek) > 0.5) el.style.setProperty('--derz-ek', `${yeni.toFixed(2)}px`)
+        el.style.setProperty('--derz-ek', '0px')
+        const t0 = ustu(el)
+        const fark = Math.ceil((t0 - 0.5) / panelH) * panelH - t0
+        if (fark > 0.5) {
+          el.style.setProperty('--derz-ek', `${fark.toFixed(2)}px`)
+          // Önceki kardeşin alt boşluğuyla çöktüyse kaydırma etkisiz kalır:
+          // çöken boşluğu da ekleyerek gerçekten `fark` kadar it.
+          if (ustu(el) - t0 < fark - 0.5) {
+            const onceki = el.previousElementSibling
+            const alt = onceki ? parseFloat(getComputedStyle(onceki).marginBottom) || 0 : 0
+            el.style.setProperty('--derz-ek', `${(fark + alt).toFixed(2)}px`)
+          }
+        }
         if (el.dataset.derz === 'blok') {
           const boy = el.getBoundingClientRect().height
           el.style.minHeight = `${Math.ceil(boy / panelH - 0.01) * panelH}px`

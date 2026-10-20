@@ -437,7 +437,6 @@
   flex-wrap: wrap;
   gap: 0.5rem 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--hair);
 }
 .heroBaslik {
   display: grid;
@@ -605,7 +604,6 @@
 }
 .ruled {
   padding-top: 1.6rem;
-  border-top: 1px solid var(--hair);
 }
 /* Bölüm başı: solda etiket ve başlık, sağda bölümün tamamına giden bağlantı. */
 .bolumBas {
@@ -616,7 +614,6 @@
   gap: 1rem 2rem;
   padding-bottom: clamp(1.5rem, 3vh, 2rem);
   margin-bottom: clamp(2rem, 5vh, 3.5rem);
-  border-bottom: 1px solid var(--hair);
 }
 .bolumBas .h2 {
   margin-bottom: 0;
@@ -684,13 +681,14 @@
   gap: 0.5rem 3rem;
   margin-top: 2.75rem;
   padding-top: 1.1rem;
-  border-top: 1px solid var(--hair);
 }
 .facts b {
   font-weight: 600;
   color: var(--yazi);
 }
 .sayilar {
+  /* Üstten hizalı: derz eklentisi ancak böyle yukarıdan iter. */
+  align-self: start;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -791,15 +789,12 @@
   width: 100%;
   margin: 0.3rem 0;
   padding: 0;
-  border-top: 1px solid var(--hair);
-  border-bottom: 1px solid var(--hair);
 }
 .kunye div {
   display: grid;
   grid-template-columns: 6.5rem minmax(0, 1fr);
   gap: 1rem;
   padding: 0.85rem 0;
-  border-top: 1px solid var(--hair);
 }
 .kunye div:first-child {
   border-top: 0;
@@ -821,7 +816,6 @@
   align-items: baseline;
   gap: 1rem;
   padding-bottom: 1.1rem;
-  border-bottom: 1px solid var(--hair);
 }
 .dizinHead h2 {
   margin: 0;
@@ -1064,7 +1058,6 @@
   gap: 0.5rem 2.5rem;
   margin-top: 1.1rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--hair);
   color: var(--dim);
 }
 .panelBody {
@@ -1134,7 +1127,6 @@
   gap: 1rem 2.5rem;
   margin-top: clamp(1.75rem, 4vh, 2.5rem);
   padding-top: 1.1rem;
-  border-top: 1px solid var(--hair);
 }
 .panelFoot a {
   border-bottom: 1px solid var(--hair);
@@ -1194,7 +1186,6 @@
 }
 .step {
   padding-top: 1.1rem;
-  border-top: 1px solid var(--hair);
 }
 .step h3 {
   font-family: var(--serif);
@@ -1218,7 +1209,6 @@
   list-style: none;
   margin: 0;
   padding: 1.5rem 0 0;
-  border-top: 1px solid var(--hair);
 }
 .toc li {
   break-inside: avoid;
@@ -1263,7 +1253,6 @@
 .srv article {
   scroll-margin-top: 6.5rem;
   padding-top: 1.1rem;
-  border-top: 1px solid var(--hair);
 }
 .srv h3 {
   font-family: var(--serif);
@@ -1327,7 +1316,6 @@
   gap: clamp(2.5rem, 6vw, 6rem);
   align-items: start;
   padding-top: 1.6rem;
-  border-top: 1px solid var(--hair);
 }
 .cols {
   columns: 2;
@@ -1351,7 +1339,6 @@
 .portrait figcaption {
   margin-top: 0.9rem;
   padding-top: 0.8rem;
-  border-top: 1px solid var(--hair);
   color: var(--dim);
 }
 @media (max-width: 900px) {
@@ -1373,7 +1360,6 @@
   gap: 0;
   align-items: start;
   padding-top: 1.6rem;
-  border-top: 1px solid var(--hair);
 }
 .formAside {
   padding-right: clamp(1.25rem, 3vw, 3rem);
@@ -1392,7 +1378,6 @@
 .formNote {
   margin-top: 1.75rem;
   padding-top: 1.1rem;
-  border-top: 1px solid var(--hair);
   color: var(--dim);
 }
 .formNote a {
@@ -1428,7 +1413,6 @@
   width: 100%;
   background: var(--boya-serit) center / 100% 100% no-repeat;
   border: 0;
-  border-bottom: 1px solid var(--hair);
   color: var(--yazi);
   font-family: var(--sans);
   font-weight: 400;
@@ -1446,16 +1430,11 @@
 .field textarea::placeholder {
   color: rgb(var(--yazi-rgb) / 0.45);
 }
-.field input:hover,
-.field select:hover,
-.field textarea:hover {
-  border-color: rgb(var(--yazi-rgb) / 0.34);
-}
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  outline: 0;
-  border-color: var(--yazi);
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  outline: 1px solid var(--yazi);
+  outline-offset: 2px;
 }
 .field select {
   appearance: none;
@@ -1476,18 +1455,17 @@
   cursor: pointer;
   text-align: center;
   padding: 1.6rem 1rem;
-  border: 1px dashed var(--hair);
   background: var(--boya-serit) center / 100% 100% no-repeat;
   color: rgb(var(--yazi-rgb) / 0.7);
   transition: border-color 0.35s ease, color 0.35s ease;
 }
 .drop:hover {
-  border-color: rgb(var(--yazi-rgb) / 0.4);
-  color: rgb(var(--yazi-rgb) / 0.7);
+  color: var(--yazi);
 }
 .field:has(input[type='file']:focus-visible) .drop {
-  border-color: rgb(var(--yazi-rgb) / 0.4);
-  color: rgb(var(--yazi-rgb) / 0.7);
+  outline: 1px solid var(--yazi);
+  outline-offset: 2px;
+  color: var(--yazi);
 }
 .visuallyHidden {
   position: absolute;
@@ -1561,7 +1539,6 @@
 .son {
   margin-top: clamp(5rem, 13vh, 9rem);
   padding: clamp(4.5rem, 11vh, 7.5rem) var(--kenar) 2rem;
-  border-top: 1px solid var(--hair);
 }
 .sonH2 {
   font-family: var(--serif);
@@ -1594,7 +1571,6 @@
   gap: 1rem;
   margin-top: clamp(5rem, 14vh, 9rem);
   padding-top: 1.1rem;
-  border-top: 1px solid var(--hair);
   color: var(--dim);
 }
 
@@ -1646,6 +1622,7 @@
 /* ── süreç, ana sayfa hâli: büyük numara, kalın üst çizgi ── */
 .stepsKisa {
   gap: 2.5rem 0;
+  margin-top: var(--derz-ek, 0px);
 }
 .stepsKisa .step {
   padding: 1.25rem 1.5rem 0 0;
